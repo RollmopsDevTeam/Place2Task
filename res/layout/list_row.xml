@@ -2,14 +2,16 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:padding="5sp" >
  	
     <!-- dummy container that holds task image -->
 
     <LinearLayout
         android:id="@+id/task_image_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10sp"
+        android:layout_marginLeft="10sp">
     	
     	<ImageView
     	    android:id="@+id/task_image"

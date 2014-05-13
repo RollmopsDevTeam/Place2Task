@@ -29,6 +29,7 @@ public class TaskListFragment extends Fragment {
 		
 		dummy.put("dummy", "empty");
 		list.add(dummy);
+		list.add(dummy);
 		
 		_taskListAdapter = new TaskListAdapter(getActivity(), list);
 		_taskList.setAdapter(_taskListAdapter);
