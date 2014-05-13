@@ -9,9 +9,8 @@ public class Task {
 	public Task(String taskName, Date creationData) {
 		_taskName = taskName;
 		_creationDate = creationData;
+
 	}
-	
-	
 	public final String getTaskName() { return _taskName; }
 	
 	public final Date getCreationDate() { return _creationDate; }

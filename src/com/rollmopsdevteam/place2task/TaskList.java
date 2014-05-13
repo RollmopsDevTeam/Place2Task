@@ -15,7 +15,7 @@ public class TaskList extends ArrayList<Task> {
 		//TODO load task list here
 	}
 	
-	public TaskList get() {
+	public static TaskList getInstance() {
 		if( _instance == null ) {
 			_instance = new TaskList();
 		} 

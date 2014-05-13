@@ -1,8 +1,6 @@
 package com.rollmopsdevteam.place2task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import com.rollmopsdevteam.place2task.TaskList;
 import com.rollmopsdevteam.place2task.R.id;
 
 import android.app.Activity;
@@ -16,18 +14,18 @@ import android.widget.TextView;
 public class TaskListAdapter extends BaseAdapter {
 
 	private Activity _activity;
-	private ArrayList<HashMap<String, String> > _taskListInfo;
+	private TaskList _taskList;
 	private static LayoutInflater _inflater=null;
 	
-	public TaskListAdapter(Activity activity, ArrayList<HashMap<String, String> > taskList ) {
+	public TaskListAdapter(Activity activity ) {
 		_activity = activity;
-		_taskListInfo = taskList;
+		_taskList = TaskList.getInstance();
 		_inflater = _activity.getLayoutInflater();
 	}
 
 	@Override
 	public int getCount() {
-		return _taskListInfo.size();
+		return _taskList.size();
 	}
 
 	@Override

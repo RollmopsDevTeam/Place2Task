@@ -12,7 +12,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
-		Log.v(Constants.LOG, "onCreate for " + MainActivity.class.getName() );
+		Log.v(Constants.LOG, "@onCreate for " + MainActivity.class.getName() );
 	
 		setContentView(R.layout.activity_main);
 
