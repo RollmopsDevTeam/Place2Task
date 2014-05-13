@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Place2Task</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="task_image_content_description">Image that represents the type of task</string>
 
 </resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+ 	
+    <!-- dummy container that holds task image -->
+
+    <LinearLayout
+        android:id="@+id/task_image_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    	
+    	<ImageView
+    	    android:id="@+id/task_image"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:contentDescription="@string/task_image_content_description" />
+        
+	</LinearLayout>
+ 	
+ 	<TextView android:id="@+id/task_name_label"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_toRightOf="@id/task_image_container"
+ 	    android:layout_alignTop="@id/task_image_container" 
+ 	    android:typeface="sans"
+ 	    android:textSize="15sp"
+ 	    android:textStyle="bold"/> 
+ 	    
+ 	<TextView android:id="@+id/task_duration_created_label"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_below="@id/task_name_label"
+ 	    android:layout_toRightOf="@id/task_image_container"
+ 	    android:textSize="12sp"
+ 	    android:layout_marginTop="1sp" />
+ 		
+</RelativeLayout>
