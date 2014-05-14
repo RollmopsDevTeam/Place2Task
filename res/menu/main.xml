@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.rollmopsdevteam.place2task.MainActivity" >
 
+    <item android:id="@+id/action_new_task"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/action_new_task"
+        android:showAsAction="always"/>
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

@@ -3,6 +3,7 @@
 
     <string name="app_name">Place2Task</string>
     <string name="action_settings">Settings</string>
+    <string name="action_new_task">Add new task</string>
     
     <string name="task_image_content_description">Image that represents the type of task</string>
 
