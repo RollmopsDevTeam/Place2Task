@@ -11,9 +11,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	
-		Log.v(Constants.LOG_TAG, "@onCreate for " + MainActivity.class.getName() );
-	
+
+		Log.v(Constants.LOG_TAG,
+				"@onCreate for " + MainActivity.class.getName());
+
 		setContentView(R.layout.activity_main);
 
 		if (savedInstanceState == null) {
