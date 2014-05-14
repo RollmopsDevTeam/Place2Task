@@ -8,10 +8,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.rollmopsdevteam.place2task.TaskListFragment" >
 
+    <ViewStub android:id="@+id/empty_task_list_view_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout="@layout/empty_task_list"
+        android:visibility="gone"/>
+    
     <ListView
         android:id="@+id/task_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" /> 
+
 
 </RelativeLayout>

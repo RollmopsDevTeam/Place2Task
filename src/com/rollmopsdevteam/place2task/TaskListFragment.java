@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ListView;
 
 public class TaskListFragment extends Fragment {
@@ -25,7 +26,10 @@ public class TaskListFragment extends Fragment {
 				container, false);
 
 		_taskList = (ListView) fragment.findViewById(R.id.task_list);
-
+		
+		ViewStub stub = (ViewStub) fragment.findViewById(R.id.empty_task_list_view_stub);
+		_taskList.setEmptyView(stub.inflate());
+		
 		_taskListAdapter = new TaskListAdapter(getActivity());
 		_taskList.setAdapter(_taskListAdapter);
 
