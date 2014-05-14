@@ -1,29 +1,27 @@
 package com.rollmopsdevteam.place2task;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.util.Xml;
 
 public class TaskList extends ArrayList<Task> {
 	
 	private static final long serialVersionUID = 4105832240816454926L;
 	private static TaskList _instance=null;
-	private static File _filesDir = null;
+	private static Context _context = null;
 	
 	// do not create TaskList by yourself. Instead use TaskList.getInstance()
 	private TaskList() {
-		if(_filesDir == null ) {
-			Log.e(Constants.LOG_TAG, "FilesDir is not set. Use TaskList.setFilesDir() before calling TaskList.getInstance()!");
+		if(_context == null ) {
+			Log.e(Constants.LOG_TAG, "Context is not set. Use TaskList.setContext() before calling TaskList.getInstance()!");
 		} else {
 			Log.v(Constants.LOG_TAG, "Creating " + TaskList.class.getName());
-			Log.v(Constants.LOG_TAG, "Trying to load XML from " + _filesDir.toString());
 			try {
 				__init();
 			} catch (Exception e) {
@@ -32,22 +30,54 @@ public class TaskList extends ArrayList<Task> {
 		}
 	}
 	
-	private static void __init() throws IOException, XmlPullParserException {
-		File inFile = new File(_filesDir, Constants.TASK_LIST_FILENAME);
-		if( inFile.exists() ) {
-			FileInputStream inStream = new FileInputStream( inFile );
-			try {
-				XmlPullParser parser = Xml.newPullParser();
-				parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-				parser.setInput(inStream, null);
-			} finally {
-				inStream.close();
+	// here is where we actually read the TaskList DB and put it into the array
+	private void __init()  {
+		TaskListDBHelper taskListDBHelper = new TaskListDBHelper(_context);
+		SQLiteDatabase db = taskListDBHelper.getReadableDatabase();
+		
+		String[] projection = { 
+				DBContract.TaskEntryContract._ID,
+				DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID,
+				DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME,
+				DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE
+		};
+		
+		Cursor c = db.query(
+				DBContract.TaskEntryContract.TABLE_NAME, 
+				projection, 
+				null,
+				null,
+				null, 
+				null,
+				null,
+				null);
+		
+		if( c != null ) {
+			while ( c.moveToNext() ) {
+				try {
+					// TODO check locale here
+					Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH)
+						.parse(c.getString(c.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE)));
+					
+					Task task = new Task(
+							c.getInt(c.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID)),
+							c.getString(c.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME)),
+							date );
+					
+					add(task);
+					
+				} catch (java.text.ParseException e) {
+					Log.e(Constants.LOG_TAG, e.getMessage());
+				}
 			}
 		}
+		c.close();
+		
+		
 	}
 	
-	public static void setFilesDir( File filesDir ) {
-		_filesDir = filesDir;
+	public static void setContext( Context context ) {
+		_context = context;
 	}
 	
 	public static TaskList getInstance() {

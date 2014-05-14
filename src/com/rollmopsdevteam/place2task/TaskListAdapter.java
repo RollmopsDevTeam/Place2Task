@@ -20,7 +20,8 @@ public class TaskListAdapter extends BaseAdapter {
 	public TaskListAdapter(Activity activity ) {
 		_activity = activity;
 		
-		TaskList.setFilesDir(activity.getApplicationContext().getFilesDir());
+		// out TaskList needs the context to create the DBHelper
+		TaskList.setContext(activity.getApplicationContext() );
 		_taskList = TaskList.getInstance();
 		
 		Log.v(Constants.LOG_TAG, "TaskList size: " + _taskList.size());
