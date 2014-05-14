@@ -45,7 +45,7 @@ public class TaskListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (vi == null) {
-			vi = _inflater.inflate(R.layout.list_row, null);
+			vi = _inflater.inflate(R.layout.task_list_element, null);
 		}
 
 		ImageView imageView = (ImageView) vi.findViewById(R.id.task_image);

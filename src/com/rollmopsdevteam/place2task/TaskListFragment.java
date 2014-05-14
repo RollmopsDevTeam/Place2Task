@@ -41,7 +41,7 @@ public class TaskListFragment extends Fragment {
 	@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.tasks_menu, menu);
     }
 	
 }
