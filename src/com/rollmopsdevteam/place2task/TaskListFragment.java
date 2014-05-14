@@ -28,4 +28,11 @@ public class TaskListFragment extends Fragment {
 
 		return fragment;
 	}
+	
+	@Override 
+	public void onStart() {
+		super.onStart();
+		TaskList.getInstance().updateFromDB();
+		
+	}
 }

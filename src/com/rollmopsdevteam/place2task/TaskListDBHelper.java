@@ -3,8 +3,7 @@ package com.rollmopsdevteam.place2task;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.rollmopsdevteam.place2task.DBContract;
+import android.util.Log;
 
 public class TaskListDBHelper extends SQLiteOpenHelper {
 
@@ -12,7 +11,7 @@ public class TaskListDBHelper extends SQLiteOpenHelper {
 			+ DBContract.TaskEntryContract.TABLE_NAME + " ("
 			+ DBContract.TaskEntryContract._ID + " INTEGER PRIMARY KEY,"
 			+ DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID
-			+ DBContract.TEXT_TYPE + DBContract.COMMA_SEP
+			+ DBContract.TEXT_TYPE + " NOT NULL UNIQUE" + DBContract.COMMA_SEP 
 			+ DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME
 			+ DBContract.TEXT_TYPE + DBContract.COMMA_SEP
 			+ DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE
@@ -28,6 +27,7 @@ public class TaskListDBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		Log.v(Constants.LOG_TAG, "Creating DB: " + SQL_CREATE_TASKS);
 		db.execSQL(SQL_CREATE_TASKS);
 	}
 

@@ -17,12 +17,12 @@ public class TaskListAdapter extends BaseAdapter {
 	private static LayoutInflater _inflater = null;
 
 	public TaskListAdapter(Activity activity) {
+		Log.v(Constants.LOG_TAG, "Constructing TaskListAdapter");
 		_activity = activity;
 
 		// our TaskList needs the context to create the DBHelper
 		TaskList.setContext(activity.getApplicationContext());
-
-		Log.v(Constants.LOG_TAG, "TaskList size: " + TaskList.getInstance().size());
+		
 		_inflater = _activity.getLayoutInflater();
 	}
 

@@ -1,13 +1,14 @@
 package com.rollmopsdevteam.place2task;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Task {
-	private int _taskID;
+	private UUID _taskID;
 	private String _taskName;
 	private Date _creationDate;
 
-	public Task(int taskID, String taskName, Date creationData) {
+	public Task(UUID taskID, String taskName, Date creationData) {
 		_taskID = taskID;
 		_taskName = taskName;
 		_creationDate = creationData;
@@ -22,7 +23,7 @@ public class Task {
 		return _creationDate;
 	}
 
-	public final int getTaskID() {
+	public final UUID getTaskID() {
 		return _taskID;
 	}
 }

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,11 +27,11 @@ public class TaskList extends ArrayList<Task> {
 		} else {
 			Log.v(Constants.LOG_TAG, "Creating " + TaskList.class.getName());
 			_taskListDBHelper = new TaskListDBHelper(_context);
-			updateFromDB();
 		}
 	}
 
 	public void updateFromDB() {
+		Log.v(Constants.LOG_TAG, "Updating TaskList from DB.");
 		clear();
 		SQLiteDatabase db = _taskListDBHelper.getReadableDatabase();
 
@@ -51,9 +52,9 @@ public class TaskList extends ArrayList<Task> {
 							.parse(c.getString(c
 									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE)));
 
-					Task task = new Task(
-							c.getInt(c
-									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID)),
+					Task task = new Task(UUID.fromString(
+							c.getString(c
+									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID))),
 							c.getString(c
 									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME)),
 							date);
@@ -69,26 +70,28 @@ public class TaskList extends ArrayList<Task> {
 	}
 
 	public void storeToDB() {
+		Log.v(Constants.LOG_TAG, "Storing TaskList to DB.");
 		SQLiteDatabase db = _taskListDBHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 
 		for (Task task : this) {
 			values.clear();
 			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID,
-					task.getTaskID());
+					task.getTaskID().toString());
 			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME,
 					task.getTaskName());
 
-			SimpleDateFormat df = new SimpleDateFormat(
+			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					Constants.DATE_TIME_FORMAT, Locale.ENGLISH);
 			values.put(DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE,
-					df.format(task.getCreationDate()));
+					dateFormat.format(task.getCreationDate()));
 
-			// we use CONFLICT_IGNORE here cause this is just meant to be an update
+			// TODO check to rather use UPDATE instead of INSERT here
+			// we use CONFLICT_IGNORE here since this is just meant to be an
+			// update
 			db.insertWithOnConflict(DBContract.TaskEntryContract.TABLE_NAME,
 					null, values, SQLiteDatabase.CONFLICT_IGNORE);
 		}
-
 	}
 
 	public static void setContext(Context context) {

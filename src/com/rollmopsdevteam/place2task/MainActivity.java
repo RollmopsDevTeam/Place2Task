@@ -42,4 +42,13 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		//TODO check if this is the right place to store to the DB
+		TaskList.getInstance().storeToDB();
+	}
 }
