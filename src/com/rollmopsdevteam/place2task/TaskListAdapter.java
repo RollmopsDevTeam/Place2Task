@@ -14,23 +14,21 @@ import com.rollmopsdevteam.place2task.R.id;
 public class TaskListAdapter extends BaseAdapter {
 
 	private Activity _activity;
-	private TaskList _taskList;
 	private static LayoutInflater _inflater = null;
 
 	public TaskListAdapter(Activity activity) {
 		_activity = activity;
 
-		// out TaskList needs the context to create the DBHelper
+		// our TaskList needs the context to create the DBHelper
 		TaskList.setContext(activity.getApplicationContext());
-		_taskList = TaskList.getInstance();
 
-		Log.v(Constants.LOG_TAG, "TaskList size: " + _taskList.size());
+		Log.v(Constants.LOG_TAG, "TaskList size: " + TaskList.getInstance().size());
 		_inflater = _activity.getLayoutInflater();
 	}
 
 	@Override
 	public int getCount() {
-		return _taskList.size();
+		return TaskList.getInstance().size();
 	}
 
 	@Override
@@ -55,9 +53,11 @@ public class TaskListAdapter extends BaseAdapter {
 		TextView taskDurationCreated = (TextView) vi
 				.findViewById(id.task_duration_created_label);
 
+		Task task = TaskList.getInstance().get(position);
+		
 		// TODO check task type
 		imageView.setImageResource(R.drawable.ic_location_task);
-		taskName.setText("Test Task");
+		taskName.setText(task.getTaskName());
 		taskDurationCreated.setText("2 Days");
 
 		return vi;
