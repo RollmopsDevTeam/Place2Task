@@ -1,6 +1,7 @@
 package com.rollmopsdevteam.place2task;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,8 @@ public class TaskListAdapter extends BaseAdapter {
 		
 		TaskList.setFilesDir(activity.getApplicationContext().getFilesDir());
 		_taskList = TaskList.getInstance();
-
+		
+		Log.v(Constants.LOG_TAG, "TaskList size: " + _taskList.size());
 		_inflater = _activity.getLayoutInflater();
 	}
 
