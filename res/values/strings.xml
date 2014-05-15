@@ -4,7 +4,7 @@
     <string name="app_name">Place2Task</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_new_task">Neue Aufgabe hinzufügen</string>
-    <string name="empty_task_list">Noch keine Aufgabe verfügbar!</string>
+    <string name="empty_task_list">Noch keine Aufgaben verfügbar!</string>
     <string name="task_image_content_description">Symbol, welches die Art der Aufgabe repräsentiert</string>
     <string name="title_activity_new_task">Neue Aufgabe hinzufügen</string>
     

@@ -88,9 +88,9 @@ public class NewTaskActivity extends Activity {
 	}
 	
 	public void onDueDateCheckBoxClicked(View v) {
-		
 		if ( ((CheckBox)v).isChecked() ) {
 			_dueDateFrame.setVisibility(View.VISIBLE);
+			_dueDateFrame.requestFocus();
 		} else {
 			_dueDateFrame.setVisibility(View.GONE);
 		}

@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="@string/empty_task_list"
+        android:lineSpacingExtra="5sp"
         android:textSize="20sp"
+        android:gravity="center"
         android:textColor="@android:color/darker_gray"
         android:layout_centerHorizontal="true" />
     

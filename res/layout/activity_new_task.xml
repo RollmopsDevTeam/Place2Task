@@ -24,15 +24,15 @@
         <View
             android:layout_width="1dip"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="4dip"
-            android:layout_marginRight="4dip"
+            android:layout_marginLeft="14dip"
+            android:layout_marginRight="14dip"
             android:background="?android:attr/dividerVertical" />
 
         <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="4dip"
+            android:layout_marginRight="14dip"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/save"
             android:textSize="@dimen/default_text_size" />
@@ -117,7 +117,9 @@
                 android:layout_marginRight="18dip"
                 android:gravity="right"
                 android:orientation="horizontal"
-                android:visibility="gone" >
+                android:visibility="gone"
+				android:focusable="true"
+                android:focusableInTouchMode="true" >
 
                 <ImageButton
                     android:id="@+id/calender_dialog_button"
