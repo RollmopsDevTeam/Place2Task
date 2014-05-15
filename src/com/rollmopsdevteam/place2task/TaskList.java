@@ -52,13 +52,15 @@ public class TaskList extends ArrayList<Task> {
 							.parse(c.getString(c
 									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE)));
 
-					Task task = new Task(UUID.fromString(
-							c.getString(c
-									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID))),
-							c.getString(c
-									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME)),
-							date);
-
+					Task task = new Task();
+					// set taskID
+					task.setTaskID(UUID.fromString(c.getString(c
+							.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID))));
+					// set task name
+					task.setTaskName(c.getString(c
+							.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME)));
+					// set creation date
+					task.setCreationDate(date);
 					add(task);
 
 				} catch (java.text.ParseException e) {
@@ -76,8 +78,8 @@ public class TaskList extends ArrayList<Task> {
 
 		for (Task task : this) {
 			values.clear();
-			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID,
-					task.getTaskID().toString());
+			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID, task
+					.getTaskID().toString());
 			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME,
 					task.getTaskName());
 

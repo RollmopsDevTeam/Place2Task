@@ -12,6 +12,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Util.context = getApplicationContext();
 
 		Log.v(Constants.LOG_TAG,
 				"@onCreate for " + MainActivity.class.getName());
