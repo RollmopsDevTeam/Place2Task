@@ -3,11 +3,8 @@ package com.rollmopsdevteam.place2task;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.widget.ListView;
 
 public class TaskListFragment extends Fragment {
@@ -27,8 +24,8 @@ public class TaskListFragment extends Fragment {
 
 		_taskList = (ListView) fragment.findViewById(R.id.task_list);
 		
-		ViewStub stub = (ViewStub) fragment.findViewById(R.id.empty_task_list_view_stub);
-		_taskList.setEmptyView(stub.inflate());
+		// TODO make this a little more fancy (ViewStup)
+		_taskList.setEmptyView(fragment.findViewById(R.id.empty_task_list));
 		
 		_taskListAdapter = new TaskListAdapter(getActivity());
 		_taskList.setAdapter(_taskListAdapter);
@@ -42,10 +39,6 @@ public class TaskListFragment extends Fragment {
 		TaskList.getInstance().updateFromDB();
 	}
 	
-	@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.tasks_menu, menu);
-    }
+
 	
 }

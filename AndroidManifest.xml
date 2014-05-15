@@ -22,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.rollmopsdevteam.place2task.NewTaskActivity"
+            android:label="@string/title_activity_new_task" >
+        </activity>
     </application>
 
 </manifest>
