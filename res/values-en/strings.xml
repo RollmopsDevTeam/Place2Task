@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Place2Task</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_new_task">Add new task</string>
+    <string name="empty_task_list">No tasks available</string>
+    <string name="task_image_content_description">Image that represents the type of task</string>
+    <string name="title_activity_new_task">Add new task</string>
+    
+    <string name="task_name_hint">Please enter a task name</string>
+    <string name="task_description_hint">Description</string>
+    
+    <string	name="save">Save</string>
+    <string name="due_date">Due date</string>
+    <string name="open_date_dialog">Open date dialog</string>
+    
+    <string name="date_format">yyyy-MM-dd</string>
+    <string name="time_format">HH:mm</string>
+    
+
+</resources>

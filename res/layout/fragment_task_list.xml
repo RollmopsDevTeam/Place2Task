@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="@string/empty_task_list"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:textColor="@android:color/darker_gray"
         android:layout_centerHorizontal="true" />
     
     <ListView

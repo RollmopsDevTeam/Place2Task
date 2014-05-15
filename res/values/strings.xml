@@ -2,19 +2,20 @@
 <resources>
 
     <string name="app_name">Place2Task</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_new_task">Add new task</string>
-    <string name="empty_task_list">No tasks available</string>
-    <string name="task_image_content_description">Image that represents the type of task</string>
-    <string name="title_activity_new_task">Add new task</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_new_task">Neue Aufgabe hinzufügen</string>
+    <string name="empty_task_list">Noch keine Aufgabe verfügbar!</string>
+    <string name="task_image_content_description">Symbol, welches die Art der Aufgabe repräsentiert</string>
+    <string name="title_activity_new_task">Neue Aufgabe hinzufügen</string>
     
-    <string name="task_name_hint">Task name</string>
+    <string name="task_name_hint">Name der Aufgabe</string>
+    <string name="task_description_hint">Beschreibung der Aufgabe</string>
     
-    <string	name="save">Save</string>
-    <string name="due_date">Due date</string>
-    <string name="open_date_dialog">Open date dialog</string>
+    <string	name="save">Speichern</string>
+    <string name="due_date">Fällig bis</string>
+    <string name="open_date_dialog">Dialog zur Wahl des Datums öffnen</string>
     
-    <string name="date_format">yyyy-MM-dd</string>
+    <string name="date_format">dd.MM.yyyy</string>
     <string name="time_format">HH:mm</string>
     
 

@@ -1,125 +1,161 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="0sp"
-    android:paddingRight="0sp"
-    android:paddingTop="@dimen/activity_new_task_horizontal_margin"
-    tools:context="com.rollmopsdevteam.place2task.NewTaskActivity$PlaceholderFragment" >
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/save_cancel_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3sp"
-        android:orientation="horizontal"
-        android:layout_alignParentRight="true"   >
-	    
-	    <Button
-	        android:id="@+id/cancel"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@android:string/cancel"
-	        android:textSize="@dimen/default_text_size"
-	        android:background="?android:attr/selectableItemBackground"
-	        android:onClick="onCancelClicked" />
-	   	
-	   	<View android:layout_width="1sp"
-		    android:layout_height="fill_parent"
-		    android:background="?android:attr/dividerVertical"
-		    android:layout_marginLeft="4dip"
-		    android:layout_marginRight="4dip" />
-	    
-	  	<Button
-	        android:id="@+id/save"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/save"
-	        android:textSize="@dimen/default_text_size"
-	        android:background="?android:attr/selectableItemBackground"/>
+        android:layout_gravity="right"
+        android:layout_marginTop="0dip"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onCancelClicked"
+            android:text="@android:string/cancel"
+            android:textSize="@dimen/default_text_size" />
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:background="?android:attr/dividerVertical" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dip"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/save"
+            android:textSize="@dimen/default_text_size" />
     </LinearLayout>
     
     <!-- horizontal line separator -->
-    <View android:id="@+id/line_separator_1" 
+    <View
+        android:id="@+id/line_separator_1"
         android:layout_width="fill_parent"
-		android:layout_height="1dip"
-		android:background="@android:color/darker_gray"
-		android:layout_below="@id/save_cancel_layout"
-		android:layout_marginTop="3sp" />
-    
-    <EditText
-        android:id="@+id/task_name"
+        android:layout_height="1dip"
+        android:layout_marginTop="0dip"
+        android:background="@android:color/darker_gray" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" 
-        android:hint="@string/task_name_hint"
-        android:layout_marginTop="@dimen/input_line_top_margin"
-        android:layout_marginLeft="14sp"
-        android:layout_marginRight="14sp"
-        android:layout_below="@id/line_separator_1" />
+        android:layout_height="wrap_content" >
 
-    <!-- horizontal line separator -->
-    <View android:id="@+id/line_separator_2" 
-        android:layout_width="fill_parent"
-		android:layout_height="1dip"
-		android:background="@android:color/darker_gray"
-		android:layout_below="@id/task_name"
-		android:layout_marginTop="@dimen/input_line_top_margin" />
-    
-    <CheckBox
-        android:id="@+id/due_date_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/task_name"
-        android:layout_below="@id/line_separator_2"
-        android:layout_marginTop="@dimen/input_line_top_margin"
-        android:text="@string/due_date"
-        android:checked="false"
-        android:onClick="onDueDateCheckBoxClicked" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-	<LinearLayout
-	    android:id="@+id/due_date_frame"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_below="@id/due_date_check_box"
-	    android:gravity="right"
-	    android:layout_marginRight="18sp"
-	    android:orientation="horizontal"
-	    android:visibility="gone" >
-	  	
-	    <ImageButton android:id="@+id/calender_dialog_button"
-	       android:background="?android:attr/selectableItemBackground"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_gravity="center_vertical"
-	       android:contentDescription="@string/open_date_dialog"
-	       android:src="@android:drawable/ic_menu_today" />
-	    
-	   	<View android:layout_width="1sp"
-		    android:layout_height="fill_parent"
-		    android:background="?android:attr/dividerVertical"
-		    android:layout_marginLeft="8dip"
-		    android:layout_marginRight="8dip" />
-	    
-	    <Button android:id="@+id/due_date_button"
-	       android:background="?android:attr/selectableItemBackground"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:onClick="onDueDateClicked" />
-	    
-	    <View android:layout_width="1sp"
-		    android:layout_height="fill_parent"
-		    android:background="?android:attr/dividerVertical"
-		    android:layout_marginLeft="8dip"
-		    android:layout_marginRight="8dip" />
-	    
-	    <Button android:id="@+id/due_time_button"
-	       android:background="?android:attr/selectableItemBackground"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"/>
-	    
-	</LinearLayout>
+            <EditText
+                android:id="@+id/task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dip"
+                android:layout_marginRight="14dip"
+                android:layout_marginTop="@dimen/input_line_top_margin"
+                android:ems="10"
+                android:lines="1"
+                android:inputType="textPersonName"
+                android:hint="@string/task_name_hint" />
 
-</RelativeLayout>
+            <!-- horizontal line separator -->
+
+            <View
+                android:id="@+id/line_separator_2"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/task_name"
+                android:layout_marginTop="@dimen/input_line_top_margin"
+                android:background="@android:color/darker_gray" />
+            
+            <EditText
+                android:id="@+id/task_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dip"
+                android:layout_marginRight="14dip"
+                android:layout_marginTop="@dimen/input_line_top_margin"
+                android:ems="10"
+                android:layout_below="@id/line_separator_2"
+                android:hint="@string/task_description_hint" />
+
+            <!-- horizontal line separator -->
+
+            <View
+                android:id="@+id/line_separator_3"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/task_description"
+                android:layout_marginTop="@dimen/input_line_top_margin"
+                android:background="@android:color/darker_gray" />
+            
+            <CheckBox
+                android:id="@+id/due_date_check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/task_name"
+                android:layout_below="@id/line_separator_3"
+                android:layout_marginTop="@dimen/input_line_top_margin"
+                android:checked="false"
+                android:onClick="onDueDateCheckBoxClicked"
+                android:text="@string/due_date" />
+
+            <LinearLayout
+                android:id="@+id/due_date_frame"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/due_date_check_box"
+                android:layout_marginRight="18dip"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <ImageButton
+                    android:id="@+id/calender_dialog_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="@string/open_date_dialog"
+                    android:src="@android:drawable/ic_menu_today" />
+
+                <View
+                    android:layout_width="1dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:background="?android:attr/dividerVertical" />
+
+                <Button
+                    android:id="@+id/due_date_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="onDueDateClicked" />
+
+                <View
+                    android:layout_width="1dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip"
+                    android:background="?android:attr/dividerVertical" />
+
+                <Button
+                    android:id="@+id/due_time_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
