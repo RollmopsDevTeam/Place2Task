@@ -9,11 +9,8 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -23,11 +20,10 @@ public class NewTaskActivity extends Activity {
 	
 	private EditText _taskNameEditText;
 
-	private CheckBox _dueDateCheckBox;
 	private LinearLayout _dueDateFrame;
 	private Button _dueDateButton;
 	private Button _dueTimeButton;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,20 +32,10 @@ public class NewTaskActivity extends Activity {
 		_saveButton = (Button) findViewById(R.id.save);
 				
 		_taskNameEditText = (EditText) findViewById(R.id.task_name);
-		_dueDateCheckBox = (CheckBox) findViewById(R.id.due_date_check_box);
 		_dueDateFrame = (LinearLayout) findViewById(R.id.due_date_frame);
-
 
 		_dueDateButton = (Button) findViewById(R.id.due_date_button);
 		_dueTimeButton = (Button) findViewById(R.id.due_time_button);
-
-		// cancel add new task
-		findViewById(R.id.cancel).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 		
 		_saveButton.setEnabled(false);
 		
@@ -75,19 +61,6 @@ public class NewTaskActivity extends Activity {
 			}
 		});
 
-		_dueDateCheckBox
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked) {
-							_dueDateFrame.setVisibility(View.VISIBLE);
-						} else {
-							_dueDateFrame.setVisibility(View.GONE);
-						}
-					}
-				});
-
 	}
 
 	@Override
@@ -108,6 +81,23 @@ public class NewTaskActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void onDueDateClicked(View v) {
+		
+	}
+	
+	public void onDueDateCheckBoxClicked(View v) {
+		
+		if ( ((CheckBox)v).isChecked() ) {
+			_dueDateFrame.setVisibility(View.VISIBLE);
+		} else {
+			_dueDateFrame.setVisibility(View.GONE);
+		}
+	}
+	
+	public void onCancelClicked(View v) {
+		finish();
 	}
 
 }
