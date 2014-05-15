@@ -1,7 +1,10 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.ui;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import com.rollmopsdevteam.place2task.R;
+import com.rollmopsdevteam.place2task.util.Utility;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -46,8 +49,8 @@ public class NewTaskActivity extends Activity {
 		_saveButton.setEnabled(false);
 		
 		_dueDate = new Date();
-		_dueDateButton.setText(Util.getFormattedDate(_dueDate));
-		_dueTimeButton.setText(Util.getFormattedTime(_dueDate));
+		_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
+		_dueTimeButton.setText(Utility.getFormattedTime(_dueDate));
 
 		_taskNameEditText.addTextChangedListener(new TextWatcher() {
 
@@ -113,7 +116,7 @@ public class NewTaskActivity extends Activity {
 		        cal.set(Calendar.MONTH, monthOfYear);
 		        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 		        _dueDate = cal.getTime();
-		        _dueDateButton.setText(Util.getFormattedDate(_dueDate));
+		        _dueDateButton.setText(Utility.getFormattedDate(_dueDate));
 			}
 		};
 	    datePickerFragment.show( getFragmentManager(), "datePicker");

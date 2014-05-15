@@ -1,4 +1,9 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.ui;
+
+import com.rollmopsdevteam.place2task.R;
+import com.rollmopsdevteam.place2task.util.Constants;
+import com.rollmopsdevteam.place2task.util.TaskList;
+import com.rollmopsdevteam.place2task.util.Utility;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +18,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		Util.context = getApplicationContext();
+		Utility.setContext( getApplicationContext() ); 
 
 		Log.v(Constants.LOG_TAG,
 				"@onCreate for " + MainActivity.class.getName());

@@ -1,4 +1,4 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.util;
 
 import java.util.Date;
 import java.util.UUID;

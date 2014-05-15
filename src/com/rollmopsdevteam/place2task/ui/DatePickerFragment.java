@@ -1,4 +1,4 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.ui;
 
 import java.util.Calendar;
 

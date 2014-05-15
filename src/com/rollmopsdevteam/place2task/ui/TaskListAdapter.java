@@ -1,4 +1,4 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.ui;
 
 import android.app.Activity;
 import android.util.Log;
@@ -9,7 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rollmopsdevteam.place2task.R;
 import com.rollmopsdevteam.place2task.R.id;
+import com.rollmopsdevteam.place2task.util.Constants;
+import com.rollmopsdevteam.place2task.util.Task;
+import com.rollmopsdevteam.place2task.util.TaskList;
 
 public class TaskListAdapter extends BaseAdapter {
 

@@ -1,4 +1,4 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

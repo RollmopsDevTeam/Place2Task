@@ -1,4 +1,7 @@
-package com.rollmopsdevteam.place2task;
+package com.rollmopsdevteam.place2task.ui;
+
+import com.rollmopsdevteam.place2task.R;
+import com.rollmopsdevteam.place2task.util.TaskList;
 
 import android.app.Fragment;
 import android.os.Bundle;
