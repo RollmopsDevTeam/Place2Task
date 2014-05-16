@@ -162,8 +162,7 @@
                     android:onClick="onDueTimeClicked" />
             </LinearLayout>
             
-                        <!-- horizontal line separator -->
-
+			<!-- horizontal line separator -->
             <View
                 android:id="@+id/line_separator_4"
                 android:layout_width="fill_parent"
@@ -171,7 +170,37 @@
                 android:layout_below="@id/due_date_frame"
                 android:layout_marginTop="@dimen/input_line_top_margin"
                 android:background="@android:color/darker_gray" />
-            
+
+            <LinearLayout android:id="@+id/location_frame"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_alignLeft="@id/task_name"
+                android:layout_below="@id/line_separator_4">
+	
+                <ImageButton android:id="@+id/location_show_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="@string/open_date_dialog"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:layout_marginRight="8dip" 
+                    android:layout_marginTop="@dimen/input_line_top_margin"
+                    android:onClick="onLocationFavoritesShowClick" /> 
+                    
+				<AutoCompleteTextView
+	                android:id="@+id/location"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_marginTop="@dimen/input_line_top_margin"
+	                android:ems="10"
+	                android:layout_marginRight="18dip"
+	                android:hint="@string/task_location_hint"
+	                android:inputType="textPostalAddress" />
+		</LinearLayout>
+			
         </RelativeLayout>
     </ScrollView>
 
