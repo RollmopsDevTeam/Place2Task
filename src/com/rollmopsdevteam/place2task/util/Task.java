@@ -10,14 +10,14 @@ public class Task {
 	private boolean _hasDueDate = false;
 	private Date _dueDate;
 
-	static final Task createTask(String taskName ) {
+	static final Task createTask(String taskName) {
 		Task task = new Task();
 		task.setCreationDate(new Date());
 		task.setTaskID(UUID.randomUUID());
 		task.setTaskName(taskName);
 		return task;
 	}
-	
+
 	public final void setTaskName(String taskName) {
 		_taskName = taskName;
 	}
@@ -26,17 +26,17 @@ public class Task {
 		_dueDate = dueDate;
 		_hasDueDate = true;
 	}
-	
-	public final void setCreationDate(Date creationDate ) {
+
+	public final void setCreationDate(Date creationDate) {
 		_creationDate = creationDate;
 	}
 
 	public final void setTaskID(UUID taskID) {
 		_taskID = taskID;
 	}
-	
+
 	// getter
-	
+
 	public final String getTaskName() {
 		return _taskName;
 	}

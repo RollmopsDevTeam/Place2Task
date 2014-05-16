@@ -17,8 +17,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		Utility.setContext( getApplicationContext() ); 
+
+		Utility.setContext(getApplicationContext());
 
 		Log.v(Constants.LOG_TAG,
 				"@onCreate for " + MainActivity.class.getName());
@@ -34,8 +34,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-
 		// TODO check if this is the right place to store to the DB
+		// this would mean opening e.g. NewTaskActivity to store to DB...is that
+		// good?
 		TaskList.getInstance().storeToDB();
 	}
 

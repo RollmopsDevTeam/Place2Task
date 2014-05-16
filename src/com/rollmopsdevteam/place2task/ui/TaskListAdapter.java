@@ -26,7 +26,7 @@ public class TaskListAdapter extends BaseAdapter {
 
 		// our TaskList needs the context to create the DBHelper
 		TaskList.setContext(activity.getApplicationContext());
-		
+
 		_inflater = _activity.getLayoutInflater();
 	}
 
@@ -58,7 +58,7 @@ public class TaskListAdapter extends BaseAdapter {
 				.findViewById(id.task_duration_created_label);
 
 		Task task = TaskList.getInstance().get(position);
-		
+
 		// TODO check task type
 		imageView.setImageResource(R.drawable.ic_location_task);
 		taskName.setText(task.getTaskName());

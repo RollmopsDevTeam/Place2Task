@@ -20,32 +20,32 @@ import com.rollmopsdevteam.place2task.R;
 import com.rollmopsdevteam.place2task.util.Utility;
 
 public class NewTaskActivity extends Activity {
-	
+
 	private Button _saveButton;
-	
+
 	private EditText _taskNameEditText;
 
 	private LinearLayout _dueDateFrame;
 	private Button _dueDateButton;
 	private Button _dueTimeButton;
-	
+
 	private Date _dueDate;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_task);
 
 		_saveButton = (Button) findViewById(R.id.save);
-				
+
 		_taskNameEditText = (EditText) findViewById(R.id.task_name);
 		_dueDateFrame = (LinearLayout) findViewById(R.id.due_date_frame);
 
 		_dueDateButton = (Button) findViewById(R.id.due_date_button);
 		_dueTimeButton = (Button) findViewById(R.id.due_time_button);
-		
+
 		_saveButton.setEnabled(false);
-		
+
 		_dueDate = new Date();
 		_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
 		_dueTimeButton.setText(Utility.getFormattedTime(_dueDate));
@@ -69,7 +69,7 @@ public class NewTaskActivity extends Activity {
 		});
 
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -89,33 +89,34 @@ public class NewTaskActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void onDueDateClicked(View v) {
 		DatePickerFragment datePicker = new DatePickerFragment();
 		datePicker.setDate(_dueDate);
 		datePicker.setOnDateSetListener(new OnDateSetListener() {
-			
+
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
-				_dueDate = Utility.getDateFromYMD(year, monthOfYear, dayOfMonth);
+				_dueDate = Utility
+						.getDateFromYMD(year, monthOfYear, dayOfMonth);
 				_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
 			}
 		});
-		
+
 		datePicker.show(getFragmentManager(), "datePicker");
 
 	}
-	
+
 	public void onDueDateCheckBoxClicked(View v) {
-		if ( ((CheckBox)v).isChecked() ) {
+		if (((CheckBox) v).isChecked()) {
 			_dueDateFrame.setVisibility(View.VISIBLE);
 			_dueDateFrame.requestFocus();
 		} else {
 			_dueDateFrame.setVisibility(View.GONE);
 		}
 	}
-	
+
 	public void onCancelClicked(View v) {
 		finish();
 	}

@@ -26,22 +26,20 @@ public class TaskListFragment extends Fragment {
 				container, false);
 
 		_taskList = (ListView) fragment.findViewById(R.id.task_list);
-		
+
 		// TODO make this a little more fancy (ViewStup)
 		_taskList.setEmptyView(fragment.findViewById(R.id.empty_task_list));
-		
+
 		_taskListAdapter = new TaskListAdapter(getActivity());
 		_taskList.setAdapter(_taskListAdapter);
 
 		return fragment;
 	}
-	
-	@Override 
+
+	@Override
 	public void onStart() {
 		super.onStart();
 		TaskList.getInstance().updateFromDB();
 	}
-	
 
-	
 }
