@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-import com.rollmopsdevteam.place2task.util.DBContract.TaskEntryContract;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

@@ -92,6 +92,8 @@ public class NewTaskActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	// TODO this is not beautiful. using the static way after all?
+	// http://developer.android.com/guide/topics/ui/controls/pickers.html
 	public void onDueDateClicked(View v) {
 		DatePickerFragment datePickerFragment = new DatePickerFragment() {
 			
