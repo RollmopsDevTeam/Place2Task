@@ -1,14 +1,9 @@
 package com.rollmopsdevteam.place2task.ui;
 
-import java.util.Calendar;
 import java.util.Date;
 
-import com.rollmopsdevteam.place2task.R;
-import com.rollmopsdevteam.place2task.util.Utility;
-
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +15,9 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.rollmopsdevteam.place2task.R;
+import com.rollmopsdevteam.place2task.util.Utility;
 
 public class NewTaskActivity extends Activity {
 	
@@ -92,36 +90,21 @@ public class NewTaskActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	// TODO this is not beautiful. using the static way after all?
-	// http://developer.android.com/guide/topics/ui/controls/pickers.html
 	public void onDueDateClicked(View v) {
-		DatePickerFragment datePickerFragment = new DatePickerFragment() {
-			
-		    @Override
-		    public Dialog onCreateDialog(Bundle savedInstanceState) {
-		        // Use the current date as the default date in the picker
-		        Calendar c = Calendar.getInstance();
-		        c.setTime(_dueDate);
-		        int year = c.get(Calendar.YEAR);
-		        int month = c.get(Calendar.MONTH);
-		        int day = c.get(Calendar.DAY_OF_MONTH);
-
-		        // Create a new instance of DatePickerDialog and return it
-		        return new DatePickerDialog(getActivity(), this, year, month, day);
-		    }
+		DatePickerFragment datePicker = new DatePickerFragment();
+		datePicker.setDate(_dueDate);
+		datePicker.setOnDateSetListener(new OnDateSetListener() {
 			
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
-				Calendar cal = Calendar.getInstance();
-		        cal.set(Calendar.YEAR, year);
-		        cal.set(Calendar.MONTH, monthOfYear);
-		        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-		        _dueDate = cal.getTime();
-		        _dueDateButton.setText(Utility.getFormattedDate(_dueDate));
+				_dueDate = Utility.getDateFromYMD(year, monthOfYear, dayOfMonth);
+				_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
 			}
-		};
-	    datePickerFragment.show( getFragmentManager(), "datePicker");
+		});
+		
+		datePicker.show(getFragmentManager(), "datePicker");
+
 	}
 	
 	public void onDueDateCheckBoxClicked(View v) {

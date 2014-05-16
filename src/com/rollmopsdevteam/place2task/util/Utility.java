@@ -1,12 +1,13 @@
 package com.rollmopsdevteam.place2task.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.rollmopsdevteam.place2task.R;
-
 import android.content.Context;
+
+import com.rollmopsdevteam.place2task.R;
 
 public class Utility {
 	
@@ -26,4 +27,13 @@ public class Utility {
 		return dateFormat.format(date);
 	}
 
+	
+	static public Date getDateFromYMD(int year, int month, int day) {
+		Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        return cal.getTime();
+	}
+	
 }
