@@ -1,9 +1,11 @@
 package com.rollmopsdevteam.place2task.ui;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
 
 import com.rollmopsdevteam.place2task.R;
 import com.rollmopsdevteam.place2task.util.Utility;
@@ -90,6 +93,7 @@ public class NewTaskActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	// click on due date selector
 	public void onDueDateClicked(View v) {
 		DatePickerFragment datePicker = new DatePickerFragment();
 		datePicker.setDate(_dueDate);
@@ -98,16 +102,40 @@ public class NewTaskActivity extends Activity {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
-				_dueDate = Utility
-						.getDateFromYMD(year, monthOfYear, dayOfMonth);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(_dueDate);
+				cal.set(Calendar.YEAR, year);
+				cal.set(Calendar.MONTH, monthOfYear);
+				cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+				_dueDate = cal.getTime();
 				_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
 			}
 		});
 
 		datePicker.show(getFragmentManager(), "datePicker");
-
 	}
 
+	// click on due time selector
+	public void onDueTimeClicked(View v) {
+		TimePickerFragment timePicker = new TimePickerFragment();
+		timePicker.setTime(_dueDate);
+		timePicker.setOnTimeSetListener(new OnTimeSetListener() {
+			
+			@Override
+			public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(_dueDate);
+				cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+				cal.set(Calendar.MINUTE, minute);
+				_dueDate = cal.getTime();
+				_dueTimeButton.setText(Utility.getFormattedTime(_dueDate));
+			}
+		});
+
+		timePicker.show(getFragmentManager(), "timePicker");
+	}
+	
+	// click on checkbox due date
 	public void onDueDateCheckBoxClicked(View v) {
 		if (((CheckBox) v).isChecked()) {
 			_dueDateFrame.setVisibility(View.VISIBLE);
@@ -117,6 +145,8 @@ public class NewTaskActivity extends Activity {
 		}
 	}
 
+	
+	// click on cancel
 	public void onCancelClicked(View v) {
 		finish();
 	}

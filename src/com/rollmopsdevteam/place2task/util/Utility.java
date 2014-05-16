@@ -1,7 +1,6 @@
 package com.rollmopsdevteam.place2task.util;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,13 +27,4 @@ public class Utility {
 				_context.getString(R.string.time_format), Locale.ENGLISH);
 		return dateFormat.format(date);
 	}
-
-	static public Date getDateFromYMD(int year, int month, int day) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month);
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		return cal.getTime();
-	}
-
 }
