@@ -15,8 +15,9 @@
     <string name="due_date">Fällig bis</string>
     <string name="open_date_dialog">Dialog zur Wahl des Datums öffnen</string>
     
-    <string name="date_format">dd.MM.yyyy</string>
+    <string name="date_format">EEEE, dd.MM.yyyy</string>
     <string name="time_format">HH:mm</string>
+    
     
 
 </resources>

@@ -6,6 +6,8 @@ import java.util.Date;
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -93,6 +95,23 @@ public class NewTaskActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	// click on calendar image
+	public void onCalendarClick(View v) {
+		final CalendarFragment calendarFragment = new CalendarFragment();
+		calendarFragment.setDate(_dueDate);
+
+		calendarFragment.setOnOkListener(new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				_dueDate = calendarFragment.getDate();
+				_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
+			}
+		});
+
+		calendarFragment.show(getFragmentManager(), null);
+	}
+
 	// click on due date selector
 	public void onDueDateClicked(View v) {
 		DatePickerFragment datePicker = new DatePickerFragment();
@@ -120,7 +139,7 @@ public class NewTaskActivity extends Activity {
 		TimePickerFragment timePicker = new TimePickerFragment();
 		timePicker.setTime(_dueDate);
 		timePicker.setOnTimeSetListener(new OnTimeSetListener() {
-			
+
 			@Override
 			public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 				Calendar cal = Calendar.getInstance();
@@ -134,7 +153,7 @@ public class NewTaskActivity extends Activity {
 
 		timePicker.show(getFragmentManager(), "timePicker");
 	}
-	
+
 	// click on checkbox due date
 	public void onDueDateCheckBoxClicked(View v) {
 		if (((CheckBox) v).isChecked()) {
@@ -145,7 +164,6 @@ public class NewTaskActivity extends Activity {
 		}
 	}
 
-	
 	// click on cancel
 	public void onCancelClicked(View v) {
 		finish();

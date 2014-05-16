@@ -18,13 +18,13 @@ public class Utility {
 
 	static public String getFormattedDate(Date date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				_context.getString(R.string.date_format), Locale.ENGLISH);
+				_context.getString(R.string.date_format), Locale.getDefault());
 		return dateFormat.format(date);
 	}
 
 	static public String getFormattedTime(Date date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				_context.getString(R.string.time_format), Locale.ENGLISH);
+				_context.getString(R.string.time_format), Locale.getDefault());
 		return dateFormat.format(date);
 	}
 }
