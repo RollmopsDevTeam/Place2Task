@@ -22,7 +22,7 @@ import com.rollmopsdevteam.place2task.util.Place;
 
 public class LocationEditText extends AutoCompleteTextView {
 
-	private static final int _maxNumberLines = 6;
+	private static final int _maxNumberLines = 10;
 
 	private LocationEditTextAdapter _locationAdapter;
 
@@ -107,9 +107,9 @@ public class LocationEditText extends AutoCompleteTextView {
 
 			for (final Place favoritePlace : _favoritePlaces) {
 				if (favoritePlace.getFavoriteName().toLowerCase()
-						.startsWith(locationName[0].toLowerCase())
+						.contains(locationName[0].toLowerCase())
 						|| favoritePlace.getAddressString().toLowerCase()
-								.startsWith(locationName[0].toLowerCase())) {
+								.contains(locationName[0].toLowerCase())) {
 					((Activity) getContext()).runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
