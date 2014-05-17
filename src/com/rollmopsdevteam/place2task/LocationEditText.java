@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,18 +15,20 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import com.rollmopsdevteam.place2task.util.Constants;
+import com.rollmopsdevteam.place2task.util.Place;
 
 public class LocationEditText extends AutoCompleteTextView {
 
 	private static final int _maxNumberLines = 6;
 
-	private ArrayAdapter<String> _locationAdapter;
+	private LocationEditTextAdapter _locationAdapter;
 
-	private List<String> _favoriteList;
+	private List<LocationSearchTask> _locationSearchTasks;
+
+	private List<Place> _favoritePlaces;
 
 	public LocationEditText(Context context) {
 		super(context);
@@ -37,16 +40,23 @@ public class LocationEditText extends AutoCompleteTextView {
 		init(context);
 	}
 
-	public void setFavoriteList( List<String> favoriteList ) {
-		_favoriteList = favoriteList;
+	public LocationEditTextAdapter getAdapter() {
+		return _locationAdapter;
 	}
-	
+
+	public void setFavoritePlaces(List<Place> favoritePlaces) {
+		_favoritePlaces = favoritePlaces;
+	}
+
+	public int getMaxNumberOfLines() {
+		return _maxNumberLines;
+	}
+
 	private void init(Context context) {
-		
-		_favoriteList = new ArrayList<String>();
-		
-		_locationAdapter = new ArrayAdapter<String>(context,
-				android.R.layout.simple_dropdown_item_1line);
+
+		_locationAdapter = new LocationEditTextAdapter((Activity) context);
+		_locationSearchTasks = new ArrayList<LocationSearchTask>();
+		_favoritePlaces = new ArrayList<Place>();
 
 		setAdapter(_locationAdapter);
 		setMaxLines(_maxNumberLines);
@@ -59,36 +69,65 @@ public class LocationEditText extends AutoCompleteTextView {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// TODO Auto-generated method stub
+
+				// Getting user input location
 
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
-
+				for (LocationSearchTask task : _locationSearchTasks) {
+					task.cancel(true);
+				}
 			}
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// Getting user input location
 				String location = getText().toString();
-
 				if (location != null && !location.equals("")) {
-					new LocationSearchTask().execute(location);
+					LocationSearchTask task = new LocationSearchTask();
+					task.execute(location);
+					_locationSearchTasks.add(task);
 				}
 			}
 		});
 	}
 
-	private class LocationSearchTask extends
+	public class LocationSearchTask extends
 			AsyncTask<String, Void, List<Address>> {
-
 		@Override
 		protected List<Address> doInBackground(String... locationName) {
-			List<Address> addresses = null;
+			((Activity) getContext()).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					_locationAdapter.clear();
+				}
+			});
 
+			for (final Place favoritePlace : _favoritePlaces) {
+				if (favoritePlace.getFavoriteName().toLowerCase()
+						.startsWith(locationName[0].toLowerCase())
+						|| favoritePlace.getAddressString().toLowerCase()
+								.startsWith(locationName[0].toLowerCase())) {
+					((Activity) getContext()).runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							_locationAdapter.add(favoritePlace);
+						}
+					});
+				}
+			}
+
+			((Activity) getContext()).runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					_locationAdapter.getFilter().filter("");
+				}
+			});
+
+			Log.v(Constants.LOG_TAG, "@doInBackground");
+			List<Address> addresses = null;
 			try {
 				// Getting a maximum of _maxNumberLines Address that matches the
 				// input text
@@ -102,26 +141,28 @@ public class LocationEditText extends AutoCompleteTextView {
 
 		@Override
 		protected void onPostExecute(List<Address> addresses) {
-			_locationAdapter.clear();
-			_locationAdapter.addAll(_favoriteList);
+			Log.v(Constants.LOG_TAG, "@onPostExecute");
 			if (addresses != null && addresses.size() > 0) {
 				for (Address address : addresses) {
-					String addressString = "";
-					for (int line = 0; line < address.getMaxAddressLineIndex(); line++) {
-						addressString += line > 0 ? ", "
-								+ address.getAddressLine(line) : address
-								.getAddressLine(line);
-					}
-					if( addressString.length() > 0 ) {	
-						_locationAdapter.add(addressString);
-					}
+					final Place place = new Place();
+					place.setAddress(address);
+					((Activity) getContext()).runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							_locationAdapter.add(place);
+						}
+					});
 				}
-				// only filter first word
-				_locationAdapter.getFilter().filter(getText().toString().split("\\s+|,|\\.")[0]);
-			}
-			
-		}
+				((Activity) getContext()).runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						_locationAdapter.getFilter().filter("");
+					}
+				});
 
+			}
+
+		}
 	}
 
 }

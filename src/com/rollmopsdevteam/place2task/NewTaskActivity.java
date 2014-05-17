@@ -1,16 +1,24 @@
 package com.rollmopsdevteam.place2task;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +29,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
+import com.rollmopsdevteam.place2task.util.Constants;
+import com.rollmopsdevteam.place2task.util.Place;
 import com.rollmopsdevteam.place2task.util.Utility;
 
 public class NewTaskActivity extends Activity {
@@ -32,15 +42,31 @@ public class NewTaskActivity extends Activity {
 	private LinearLayout _dueDateFrame;
 	private Button _dueDateButton;
 	private Button _dueTimeButton;
+	private LocationEditText _locationEditText;
 
 	private Date _dueDate;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_task);
+		_locationEditText = (LocationEditText) findViewById(R.id.location);
+		// TODO remove
+		List<Place> favs = new ArrayList<Place>();
+		Place fav = new Place();
+		fav.setIsFavorite(true);
+		fav.setName("Super duper");
+		try {
+			fav.setAddress(new Geocoder(getApplicationContext())
+					.getFromLocationName("Radebeul", 1).get(0));
+		} catch (IOException e) {
+		}
+		favs.add(fav);
+		_locationEditText.setFavoritePlaces(favs);
 
 		_saveButton = (Button) findViewById(R.id.save);
+
+
 
 		_taskNameEditText = (EditText) findViewById(R.id.task_name);
 		_dueDateFrame = (LinearLayout) findViewById(R.id.due_date_frame);
@@ -55,24 +81,25 @@ public class NewTaskActivity extends Activity {
 		_dueTimeButton.setText(Utility.getFormattedTime(_dueDate));
 
 		_taskNameEditText.addTextChangedListener(new TextWatcher() {
-			
+
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
 			}
-			
+
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				
+
 			}
-			
+
 			@Override
 			public void afterTextChanged(Editable s) {
 				_saveButton.setEnabled(s.length() > 0);
-				
+
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -168,9 +195,5 @@ public class NewTaskActivity extends Activity {
 	public void onCancelClicked(View v) {
 		finish();
 	}
-	
-
-	
-	
 
 }
