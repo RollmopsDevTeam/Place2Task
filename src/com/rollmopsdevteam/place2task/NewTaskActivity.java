@@ -1,34 +1,26 @@
-package com.rollmopsdevteam.place2task.ui;
+package com.rollmopsdevteam.place2task;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.TimePicker;
 
-import com.rollmopsdevteam.place2task.R;
 import com.rollmopsdevteam.place2task.util.Utility;
 
 public class NewTaskActivity extends Activity {
@@ -43,8 +35,6 @@ public class NewTaskActivity extends Activity {
 
 	private Date _dueDate;
 	
-	private Geocoder _geocoder;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,19 +54,25 @@ public class NewTaskActivity extends Activity {
 		_dueDateButton.setText(Utility.getFormattedDate(_dueDate));
 		_dueTimeButton.setText(Utility.getFormattedTime(_dueDate));
 
-		_taskNameEditText.setOnEditorActionListener(new OnEditorActionListener() {
+		_taskNameEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				_saveButton.setEnabled(v.length() > 0);
-				return false;
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				_saveButton.setEnabled(s.length() > 0);
+				
 			}
 		});
 		
-		// location stuff
-		_geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-		setLocationListener();
-
 	}
 
 	@Override
@@ -173,10 +169,8 @@ public class NewTaskActivity extends Activity {
 		finish();
 	}
 	
-	private void setLocationListener() {
-		AutoCompleteTextView locationText = (AutoCompleteTextView) findViewById(R.id.location);
-		
 
-	}
+	
+	
 
 }

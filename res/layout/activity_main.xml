@@ -3,6 +3,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rollmopsdevteam.place2task.ui.MainActivity"
+    tools:context="com.rollmopsdevteam.place2task.MainActivity"
     tools:ignore="MergeRootFrame" />
 

@@ -1,4 +1,4 @@
-package com.rollmopsdevteam.place2task.ui;
+package com.rollmopsdevteam.place2task;
 
 import com.rollmopsdevteam.place2task.R;
 import com.rollmopsdevteam.place2task.util.TaskList;

@@ -1,4 +1,4 @@
-package com.rollmopsdevteam.place2task.ui;
+package com.rollmopsdevteam.place2task;
 
 import android.app.Activity;
 import android.util.Log;
