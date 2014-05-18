@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 
-import com.rollmopsdevteam.place2task.R;
 
 public class CalendarFragment extends DialogFragment {
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <item android:id="@+id/action_new_task" 
+ <item android:id="@+id/action_new_place" 
         android:visible="true" 
-        android:showAsAction="ifRoom" 
+        android:showAsAction="ifRoom"
         android:enabled="true" 
-        android:icon="@drawable/ic_action_new_white"
-        android:title="@string/action_new_task"/>
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_new_place"/> 
     
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_settings_1"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>

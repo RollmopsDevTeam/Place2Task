@@ -9,11 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rollmopsdevteam.place2task.R;
-import com.rollmopsdevteam.place2task.R.id;
 import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.Task;
 import com.rollmopsdevteam.place2task.util.TaskList;
+import com.rollmopsdevteam.place2task.R;
 
 public class TaskListAdapter extends BaseAdapter {
 
@@ -53,9 +52,9 @@ public class TaskListAdapter extends BaseAdapter {
 		}
 
 		ImageView imageView = (ImageView) vi.findViewById(R.id.task_image);
-		TextView taskName = (TextView) vi.findViewById(id.task_name_label);
+		TextView taskName = (TextView) vi.findViewById(R.id.task_name_label);
 		TextView taskDurationCreated = (TextView) vi
-				.findViewById(id.task_duration_created_label);
+				.findViewById(R.id.task_duration_created_label);
 
 		Task task = TaskList.getInstance().get(position);
 

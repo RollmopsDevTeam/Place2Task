@@ -1,20 +1,13 @@
 package com.rollmopsdevteam.place2task;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.Place;
 
 public class LocationEditTextAdapter extends ArrayAdapter<Place> implements

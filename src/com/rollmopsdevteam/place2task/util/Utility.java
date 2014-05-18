@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import android.content.Context;
-
 import com.rollmopsdevteam.place2task.R;
+
+import android.content.Context;
 
 public class Utility {
 
