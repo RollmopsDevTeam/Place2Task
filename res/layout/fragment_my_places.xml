@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
-	<com.google.android.gms.maps.MapView 
+	<View android:id="@+id/map"
 	    android:layout_height="match_parent"
 	    android:layout_width="match_parent"
 	    android:clickable="false"
+	    class="com.google.android.gms.maps.MapView"
+	    
 	/>
     
 </RelativeLayout>
