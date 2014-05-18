@@ -5,31 +5,30 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.location.Address;
+import android.graphics.Typeface;
 import android.location.Geocoder;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
-import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.Place;
 import com.rollmopsdevteam.place2task.util.Utility;
 
@@ -45,28 +44,37 @@ public class NewTaskActivity extends Activity {
 	private LocationEditText _locationEditText;
 
 	private Date _dueDate;
+	private Place _currentPlace;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_task);
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
-		// TODO remove
-		List<Place> favs = new ArrayList<Place>();
-		Place fav = new Place();
-		fav.setIsFavorite(true);
-		fav.setName("Super duper");
-		try {
-			fav.setAddress(new Geocoder(getApplicationContext())
-					.getFromLocationName("Radebeul", 1).get(0));
-		} catch (IOException e) {
-		}
-		favs.add(fav);
-		_locationEditText.setFavoritePlaces(favs);
+		
+		//TODO add favorites to _locationEditText
+		
+		_locationEditText.setOnItemClickListener( new OnItemClickListener() {
+			
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				ImageButton starButton = (ImageButton)findViewById(R.id.add_to_favorites);
+				Place selectedPlace = (Place)arg0.getItemAtPosition(arg2);
+				if( selectedPlace.isFavorite() ) {
+					_locationEditText.setText(selectedPlace.getFavoriteName());
+					_locationEditText.setTypeface(null, Typeface.BOLD);
+					starButton.setImageResource(android.R.drawable.star_on);
+					
+				} else {
+					_locationEditText.setText(selectedPlace.getAddressStringList().get(0));
+					_locationEditText.setTypeface(null, Typeface.NORMAL);
+					starButton.setImageResource(android.R.drawable.star_off);
+					starButton.setContentDescription(getString(R.string.add_to_favorite_places));
+				}
+				setSaveButton();
+			}
+		});
 
 		_saveButton = (Button) findViewById(R.id.save);
-
-
 
 		_taskNameEditText = (EditText) findViewById(R.id.task_name);
 		_dueDateFrame = (LinearLayout) findViewById(R.id.due_date_frame);
@@ -95,8 +103,7 @@ public class NewTaskActivity extends Activity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				_saveButton.setEnabled(s.length() > 0);
-
+				setSaveButton();
 			}
 		});
 
@@ -194,6 +201,10 @@ public class NewTaskActivity extends Activity {
 	// click on cancel
 	public void onCancelClicked(View v) {
 		finish();
+	}
+	
+	private void setSaveButton() {
+		_saveButton.setEnabled(_taskNameEditText.getText().length() > 0 && _locationEditText.getText().length() > 0);
 	}
 
 }

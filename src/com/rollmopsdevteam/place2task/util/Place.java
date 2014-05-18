@@ -1,31 +1,37 @@
 package com.rollmopsdevteam.place2task.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.location.Address;
 
 public class Place {
 
 	private String _favoriteName;
-	private Address _address;
-	private String _addressString;
+	private List<Address> _addressList;
+	private List<String> _addressStringList;
 	private float _distanceInMeters;
 	private boolean _isFavorite;
 
 	public Place() {
 		_isFavorite = false;
+		_addressList = new ArrayList<Address>();
+		_addressStringList = new ArrayList<String>();
 	}
 	
 	public final void setName(String name) {
 		_favoriteName = name;
 	}
 
-	public final void setAddress(Address address) {
-		_address = address;
-		_addressString = _address.getAddressLine(0);
-		if(_address.getMaxAddressLineIndex() > 1 ) {
-			for(int i = 1; i < _address.getMaxAddressLineIndex(); i++ ) {
-				_addressString += ", " + _address.getAddressLine(i);
+	public final void addAddress(Address address) {
+		_addressList.add(address);
+		String addressString = address.getAddressLine(0);
+		if(address.getMaxAddressLineIndex() > 1 ) {
+			for(int i = 1; i < address.getMaxAddressLineIndex(); i++ ) {
+				addressString += ", " + address.getAddressLine(i);
 			}
 		}
+		_addressStringList.add(addressString);
 	}
 	
 	public final void setDistanceInMeters(float distance) {
@@ -36,8 +42,8 @@ public class Place {
 		_isFavorite = isFavorite;
 	}
 	
-	public final Address getAddress() {
-		return _address;
+	public final List<Address> getAddressList() {
+		return _addressList;
 	}
 	
 	public final boolean isFavorite() {
@@ -48,7 +54,7 @@ public class Place {
 		return _favoriteName;
 	}
 	
-	public final String getAddressString() {
-		return _addressString;
+	public final List<String> getAddressStringList() {
+		return _addressStringList;
 	}
 }

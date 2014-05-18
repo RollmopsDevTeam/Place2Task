@@ -16,6 +16,9 @@
     <string name="due_date">Due date</string>
     <string name="open_date_dialog">Open date dialog</string>
     
+    <string name="add_to_favorite_places">Add to my places</string>
+    <string name="remove_from_favorite_places">Remove from my places</string>
+    
     <string name="date_format">E, yyyy-MM-dd</string>
     <string name="time_format">HH:mm</string>
     

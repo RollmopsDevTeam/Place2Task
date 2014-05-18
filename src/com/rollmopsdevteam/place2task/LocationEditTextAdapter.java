@@ -50,10 +50,14 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 				: Typeface.NORMAL);
 
 		if (place.isFavorite()) {
-			locationNameView.setText(place.getFavoriteName());
-			descriptionView.setText(place.getAddress().getAddressLine(0));
+			String favoriteName = place.getFavoriteName();
+			if(place.getAddressList().size() > 1) {
+				favoriteName += " (" + place.getAddressList().size() + ")";
+			}
+			locationNameView.setText(favoriteName);
+			descriptionView.setText("In " + place.getAddressList().get(0).getCountryName());
 		} else {
-			locationNameView.setText(place.getAddressString());
+			locationNameView.setText(place.getAddressStringList().get(0));
 		}
 
 		return vi;
