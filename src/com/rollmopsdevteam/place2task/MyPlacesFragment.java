@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 public class MyPlacesFragment extends Fragment {
 
 	@Override
