@@ -44,11 +44,12 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 
 		if (place.isFavorite()) {
 			String favoriteName = place.getFavoriteName();
-			if(place.getAddressList().size() > 1) {
+			if (place.getAddressList().size() > 1) {
 				favoriteName += " (" + place.getAddressList().size() + ")";
 			}
 			locationNameView.setText(favoriteName);
-			descriptionView.setText("In " + place.getAddressList().get(0).getCountryName());
+			descriptionView.setText("In "
+					+ place.getAddressList().get(0).getCountryName());
 		} else {
 			locationNameView.setText(place.getAddressStringList().get(0));
 		}

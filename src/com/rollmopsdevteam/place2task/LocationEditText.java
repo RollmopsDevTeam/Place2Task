@@ -108,7 +108,8 @@ public class LocationEditText extends AutoCompleteTextView {
 			for (final Place favoritePlace : _favoritePlaces) {
 				if (favoritePlace.getFavoriteName().toLowerCase()
 						.contains(locationName[0].toLowerCase())
-						|| favoritePlace.getAddressStringList().get(0).toLowerCase()
+						|| favoritePlace.getAddressStringList().get(0)
+								.toLowerCase()
 								.contains(locationName[0].toLowerCase())) {
 					((Activity) getContext()).runOnUiThread(new Runnable() {
 						@Override

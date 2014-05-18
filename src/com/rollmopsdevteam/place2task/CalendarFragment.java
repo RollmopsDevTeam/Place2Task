@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 
-
 public class CalendarFragment extends DialogFragment {
 
 	private DialogInterface.OnClickListener _onCancelListener;

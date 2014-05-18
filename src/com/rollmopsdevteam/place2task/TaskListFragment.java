@@ -43,7 +43,7 @@ public class TaskListFragment extends Fragment {
 		super.onStart();
 		TaskList.getInstance().updateFromDB();
 	}
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.task_list_menu, menu);
@@ -54,7 +54,8 @@ public class TaskListFragment extends Fragment {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_new_task:
-			Intent newTaskIntent = new Intent(getActivity(), NewTaskActivity.class);
+			Intent newTaskIntent = new Intent(getActivity(),
+					NewTaskActivity.class);
 			startActivity(newTaskIntent);
 			return true;
 

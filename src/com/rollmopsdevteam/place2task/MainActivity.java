@@ -14,20 +14,21 @@ import com.rollmopsdevteam.place2task.util.TaskList;
 import com.rollmopsdevteam.place2task.util.Utility;
 
 public class MainActivity extends FragmentActivity {
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Utility.setContext(getApplicationContext());
 
 		Log.v(Constants.LOG_TAG,
 				"@onCreate for " + MainActivity.class.getName());
 
 		setContentView(R.layout.activity_main);
-		
-		MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
-		ViewPager pager = (ViewPager)findViewById(R.id.pager);
+
+		MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(
+				getSupportFragmentManager());
+		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 	}
 
@@ -40,20 +41,17 @@ public class MainActivity extends FragmentActivity {
 		TaskList.getInstance().storeToDB();
 	}
 
-
-
-	
 	public static class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-		
+
 		public MainFragmentPagerAdapter(FragmentManager fragmentManager) {
 			super(fragmentManager);
 		}
-		
+
 		@Override
 		public int getCount() {
 			return 2;
 		}
-		
+
 		@Override
 		public Fragment getItem(int position) {
 			switch (position) {
@@ -64,8 +62,8 @@ public class MainActivity extends FragmentActivity {
 			}
 		}
 	}
-	
-	public void setActionBarTitle(String title){
-	    getActionBar().setTitle(title);
+
+	public void setActionBarTitle(String title) {
+		getActionBar().setTitle(title);
 	}
 }

@@ -47,24 +47,27 @@ public class NewTaskActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_task);
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
-		
-		//TODO add favorites to _locationEditText
-		
-		_locationEditText.setOnItemClickListener( new OnItemClickListener() {
-			
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-				ImageButton starButton = (ImageButton)findViewById(R.id.add_to_favorites);
-				Place selectedPlace = (Place)arg0.getItemAtPosition(arg2);
-				if( selectedPlace.isFavorite() ) {
+
+		// TODO add favorites to _locationEditText
+
+		_locationEditText.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				ImageButton starButton = (ImageButton) findViewById(R.id.add_to_favorites);
+				Place selectedPlace = (Place) arg0.getItemAtPosition(arg2);
+				if (selectedPlace.isFavorite()) {
 					_locationEditText.setText(selectedPlace.getFavoriteName());
 					_locationEditText.setTypeface(null, Typeface.BOLD);
 					starButton.setImageResource(android.R.drawable.star_on);
-					
+
 				} else {
-					_locationEditText.setText(selectedPlace.getAddressStringList().get(0));
+					_locationEditText.setText(selectedPlace
+							.getAddressStringList().get(0));
 					_locationEditText.setTypeface(null, Typeface.NORMAL);
 					starButton.setImageResource(android.R.drawable.star_off);
-					starButton.setContentDescription(getString(R.string.add_to_favorite_places));
+					starButton
+							.setContentDescription(getString(R.string.add_to_favorite_places));
 				}
 				setSaveButton();
 			}
@@ -198,9 +201,10 @@ public class NewTaskActivity extends Activity {
 	public void onCancelClicked(View v) {
 		finish();
 	}
-	
+
 	private void setSaveButton() {
-		_saveButton.setEnabled(_taskNameEditText.getText().length() > 0 && _locationEditText.getText().length() > 0);
+		_saveButton.setEnabled(_taskNameEditText.getText().length() > 0
+				&& _locationEditText.getText().length() > 0);
 	}
 
 }
