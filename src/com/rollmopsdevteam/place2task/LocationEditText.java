@@ -52,55 +52,6 @@ public class LocationEditText extends AutoCompleteTextView {
 		return _maxNumberLines;
 	}
 	
-	public Place forceGetPlaceFromText() {
-		List<Address> addresses = getAddressesFromString(getText().toString(), _maxNumberLines );
-		final Place ret = new Place();
-		if( addresses != null && addresses.size() > 0) {
-			
-			//here we show a prompt to let the user  choose addresses 
-			//TODO put this in a separate class/file
-			if( addresses.size() > 1 ) {
-				
-				final List<Address> selectedAddresses = new ArrayList<Address>();
-				
-				AlertDialog.Builder placesSelection = new AlertDialog.Builder(getContext());
-				placesSelection.setTitle("HUHU");
-				
-				final ArrayAdapter<Address> adapter = new ArrayAdapter<Address>(getContext(), android.R.layout.select_dialog_multichoice);
-				adapter.addAll(addresses);
-				placesSelection.setAdapter(adapter, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						selectedAddresses.add(adapter.getItem(which));
-						
-					}
-				});
-				placesSelection.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						
-					}
-				});
-				
-				placesSelection.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						for(Address selected : selectedAddresses) {
-							ret.addAddress(selected);
-						}
-					}
-				});
-				placesSelection.show();
-			} else {
-				ret.addAddress(addresses.get(0));
-			}
-		}
-		return ret;
-	}
 
 	private List<Address> getAddressesFromString( String location, int max ) {
 		List<Address> addresses = null;

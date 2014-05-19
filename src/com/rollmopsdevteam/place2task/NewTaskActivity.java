@@ -15,7 +15,6 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -50,20 +49,6 @@ public class NewTaskActivity extends Activity {
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
 
 		// TODO add favorites to _locationEditText
-		
-		_locationEditText.setOnFocusChangeListener( new OnFocusChangeListener() {
-			
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if( !hasFocus ) {
-					if( _currentPlace == null ) {
-						_currentPlace = _locationEditText.forceGetPlaceFromText();
-						updateInterface();
-					}
-				}
-				
-			}
-		});
 		
 		_locationEditText.setOnItemClickListener(new OnItemClickListener() {
 

@@ -10,5 +10,4 @@
 	    android:clickable="false"
 	    android:apiKey="@string/dev_googlemaps_sdk_key"
 	    />
-    
 </RelativeLayout>
