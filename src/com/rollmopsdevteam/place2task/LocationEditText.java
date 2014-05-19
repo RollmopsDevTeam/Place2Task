@@ -58,6 +58,7 @@ public class LocationEditText extends AutoCompleteTextView {
 		if( addresses != null && addresses.size() > 0) {
 			
 			//here we show a prompt to let the user  choose addresses 
+			//TODO put this in a separate class/file
 			if( addresses.size() > 1 ) {
 				
 				final List<Address> selectedAddresses = new ArrayList<Address>();
@@ -93,6 +94,7 @@ public class LocationEditText extends AutoCompleteTextView {
 						}
 					}
 				});
+				placesSelection.show();
 			} else {
 				ret.addAddress(addresses.get(0));
 			}
