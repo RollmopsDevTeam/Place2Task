@@ -29,8 +29,7 @@ public class MainActivity extends MapActivity {
 				getFragmentManager());
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
-		
-		
+
 	}
 
 	@Override

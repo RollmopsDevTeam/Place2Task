@@ -38,7 +38,7 @@ public class MyPlacesFragment extends MapFragment {
 			_mapView.onCreate(savedInstanceState);
 			if (_mapView != null) {
 				_map = _mapView.getMap();
-				_map.getUiSettings().setMyLocationButtonEnabled(false);
+				_map.getUiSettings().setMyLocationButtonEnabled(true);
 				_map.setMyLocationEnabled(true);
 				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
 						new LatLng(43.1, -87.9), 10);
