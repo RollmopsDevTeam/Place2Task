@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -15,6 +17,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import com.rollmopsdevteam.place2task.util.Constants;
@@ -51,12 +54,46 @@ public class LocationEditText extends AutoCompleteTextView {
 	
 	public Place forceGetPlaceFromText() {
 		List<Address> addresses = getAddressesFromString(getText().toString(), _maxNumberLines );
-		Place ret = null;
+		final Place ret = new Place();
 		if( addresses != null && addresses.size() > 0) {
+			
+			//here we show a prompt to let the user  choose addresses 
 			if( addresses.size() > 1 ) {
-				// TODO show prompt to choose addresses (multiselect)
+				
+				final List<Address> selectedAddresses = new ArrayList<Address>();
+				
+				AlertDialog.Builder placesSelection = new AlertDialog.Builder(getContext());
+				placesSelection.setTitle("HUHU");
+				
+				final ArrayAdapter<Address> adapter = new ArrayAdapter<Address>(getContext(), android.R.layout.select_dialog_multichoice);
+				adapter.addAll(addresses);
+				placesSelection.setAdapter(adapter, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						selectedAddresses.add(adapter.getItem(which));
+						
+					}
+				});
+				placesSelection.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						
+					}
+				});
+				
+				placesSelection.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						for(Address selected : selectedAddresses) {
+							ret.addAddress(selected);
+						}
+					}
+				});
 			} else {
-				ret = new Place();
 				ret.addAddress(addresses.get(0));
 			}
 		}
