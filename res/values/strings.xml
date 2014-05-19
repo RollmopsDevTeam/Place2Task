@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="dev_googlemaps_sdk_key">AIzaSyDiyCjm29B9DlxqbKhMTEKqt_MCyXae62Y</string>
+    <string name="dev_googlemaps_sdk_key">AIzaSyDDvDVWStOixM_ZcqdBR2yOwPg2ZwnyIpY</string>
     
     <string name="app_name">Place2Task</string>
     <string name="action_settings">Einstellungen</string>

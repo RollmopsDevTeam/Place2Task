@@ -2,17 +2,17 @@ package com.rollmopsdevteam.place2task;
 
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.app.Activity;
 import android.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.app.FragmentManager;
 import android.util.Log;
 
-import com.google.android.maps.MapActivity;
 import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.TaskList;
 import com.rollmopsdevteam.place2task.util.Utility;
 
-public class MainActivity extends MapActivity {
+public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +67,4 @@ public class MainActivity extends MapActivity {
 		getActionBar().setTitle(title);
 	}
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

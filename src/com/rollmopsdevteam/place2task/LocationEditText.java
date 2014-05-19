@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -17,7 +15,6 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import com.rollmopsdevteam.place2task.util.Constants;
