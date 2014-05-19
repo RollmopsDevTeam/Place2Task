@@ -23,11 +23,8 @@ import com.rollmopsdevteam.place2task.util.Place;
 public class LocationEditText extends AutoCompleteTextView {
 
 	private static final int _maxNumberLines = 10;
-
 	private LocationEditTextAdapter _locationAdapter;
-
 	private List<LocationSearchTask> _locationSearchTasks;
-
 	private List<Place> _favoritePlaces;
 
 	public LocationEditText(Context context) {
@@ -51,7 +48,34 @@ public class LocationEditText extends AutoCompleteTextView {
 	public int getMaxNumberOfLines() {
 		return _maxNumberLines;
 	}
+	
+	public Place forceGetPlaceFromText() {
+		List<Address> addresses = getAddressesFromString(getText().toString(), _maxNumberLines );
+		Place ret = null;
+		if( addresses != null && addresses.size() > 0) {
+			if( addresses.size() > 1 ) {
+				// TODO show prompt to choose addresses (multiselect)
+			} else {
+				ret = new Place();
+				ret.addAddress(addresses.get(0));
+			}
+		}
+		return ret;
+	}
 
+	private List<Address> getAddressesFromString( String location, int max ) {
+		List<Address> addresses = null;
+		try {
+			// Getting a maximum of _maxNumberLines Address that matches the
+			// input text
+			addresses = new Geocoder(getContext(), Locale.getDefault())
+					.getFromLocationName(getText().toString(), max);
+		} catch (IOException e) {
+			Log.e(Constants.LOG_TAG, "IOException: " + e.getMessage());
+		}
+		return addresses;
+	}
+	
 	private void init(Context context) {
 
 		_locationAdapter = new LocationEditTextAdapter((Activity) context);
@@ -128,16 +152,9 @@ public class LocationEditText extends AutoCompleteTextView {
 			});
 
 			Log.v(Constants.LOG_TAG, "@doInBackground");
-			List<Address> addresses = null;
-			try {
-				// Getting a maximum of _maxNumberLines Address that matches the
-				// input text
-				addresses = new Geocoder(getContext(), Locale.getDefault())
-						.getFromLocationName(locationName[0], _maxNumberLines);
-			} catch (IOException e) {
-				Log.e(Constants.LOG_TAG, "IOException: " + e.getMessage());
-			}
-			return addresses;
+			
+			// get addresses
+			return getAddressesFromString(locationName[0], _maxNumberLines);
 		}
 
 		@Override

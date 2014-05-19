@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -40,7 +41,7 @@ public class NewTaskActivity extends Activity {
 	private LocationEditText _locationEditText;
 
 	private Date _dueDate;
-	private Place _currentPlace;
+	private Place _currentPlace = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,27 +50,41 @@ public class NewTaskActivity extends Activity {
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
 
 		// TODO add favorites to _locationEditText
-
+		
+		_locationEditText.setOnFocusChangeListener( new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if( !hasFocus ) {
+					if( _currentPlace == null ) {
+						_currentPlace = _locationEditText.forceGetPlaceFromText();
+						updateInterface();
+					}
+				}
+				
+			}
+		});
+		
 		_locationEditText.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				ImageButton starButton = (ImageButton) findViewById(R.id.add_to_favorites);
-				Place selectedPlace = (Place) arg0.getItemAtPosition(arg2);
-				if (selectedPlace.isFavorite()) {
-					_locationEditText.setText(selectedPlace.getFavoriteName());
+				_currentPlace = (Place) arg0.getItemAtPosition(arg2);
+				if (_currentPlace.isFavorite()) {
+					_locationEditText.setText(_currentPlace.getFavoriteName());
 					_locationEditText.setTypeface(null, Typeface.BOLD);
 					starButton.setImageResource(android.R.drawable.star_on);
 
 				} else {
-					_locationEditText.setText(selectedPlace
+					_locationEditText.setText(_currentPlace
 							.getAddressStringList().get(0));
 					_locationEditText.setTypeface(null, Typeface.NORMAL);
 					starButton.setImageResource(android.R.drawable.star_off);
 					starButton
 							.setContentDescription(getString(R.string.add_to_favorite_places));
 				}
-				setSaveButton();
+				updateInterface();
 			}
 		});
 
@@ -102,7 +117,7 @@ public class NewTaskActivity extends Activity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				setSaveButton();
+				updateInterface();
 			}
 		});
 
@@ -201,10 +216,15 @@ public class NewTaskActivity extends Activity {
 	public void onCancelClicked(View v) {
 		finish();
 	}
+	
+	public void onSaveClicked(View v) {
 
-	private void setSaveButton() {
+	}
+
+	private void updateInterface() {
 		_saveButton.setEnabled(_taskNameEditText.getText().length() > 0
-				&& _locationEditText.getText().length() > 0);
+				&& _locationEditText.getText().length() > 0
+				&& _currentPlace != null);
 	}
 
 }

@@ -37,7 +37,8 @@
             android:layout_marginRight="14dip"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/save"
-            android:textSize="@dimen/default_text_size" />
+            android:textSize="@dimen/default_text_size"
+            android:onClick="onSaveClicked" />
     </LinearLayout>
 
     <!-- horizontal line separator -->
