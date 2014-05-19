@@ -1,7 +1,6 @@
 package com.rollmopsdevteam.place2task;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,10 +13,11 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 
-public class MyPlacesFragment extends Fragment {
+public class MyPlacesFragment extends MapFragment {
 
 	private MapView _mapView;
 	private GoogleMap _map;
@@ -25,7 +25,7 @@ public class MyPlacesFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		super.onCreateView(inflater, container, savedInstanceState);
 		setHasOptionsMenu(true);
 		View fragment = inflater.inflate(R.layout.fragment_my_places,
 				container, false);
@@ -39,7 +39,7 @@ public class MyPlacesFragment extends Fragment {
 			if (_mapView != null) {
 				_map = _mapView.getMap();
 				_map.getUiSettings().setMyLocationButtonEnabled(false);
-				_map.setMyLocationEnabled(true);
+//				_map.setMyLocationEnabled(true);
 				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
 						new LatLng(43.1, -87.9), 10);
 				_map.animateCamera(cameraUpdate);

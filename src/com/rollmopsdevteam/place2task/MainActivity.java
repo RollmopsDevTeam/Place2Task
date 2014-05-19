@@ -1,19 +1,18 @@
 package com.rollmopsdevteam.place2task;
 
-import com.rollmopsdevteam.place2task.R;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
+import android.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.app.FragmentManager;
 import android.util.Log;
 
+import com.google.android.maps.MapActivity;
 import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.TaskList;
 import com.rollmopsdevteam.place2task.util.Utility;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends MapActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +26,11 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 
 		MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(
-				getSupportFragmentManager());
+				getFragmentManager());
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
+		
+		
 	}
 
 	@Override
@@ -65,5 +66,11 @@ public class MainActivity extends FragmentActivity {
 
 	public void setActionBarTitle(String title) {
 		getActionBar().setTitle(title);
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
