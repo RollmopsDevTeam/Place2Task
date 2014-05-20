@@ -35,13 +35,8 @@ public class TaskList extends ArrayList<Task> {
 		clear();
 		SQLiteDatabase db = _taskListDBHelper.getReadableDatabase();
 
-		String[] projection = { DBContract.TaskEntryContract._ID,
-				DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID,
-				DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME,
-				DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE };
-
 		Cursor c = db.query(DBContract.TaskEntryContract.TABLE_NAME,
-				projection, null, null, null, null, null, null);
+				DBContract.TaskEntryContract.PROJECTION, null, null, null, null, null, null);
 
 		if (c != null) {
 			while (c.moveToNext()) {
