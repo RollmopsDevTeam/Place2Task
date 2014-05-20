@@ -11,6 +11,7 @@ public class Place {
 	private List<Address> _addressList;
 	private int _distanceInMeters;
 	private boolean _isFavorite;
+	private List<String> _addressAsStringList;
 
 	public Place() {
 		_isFavorite = false;
@@ -20,9 +21,10 @@ public class Place {
 	public final void setName(String name) {
 		_favoriteName = name;
 	}
-
+	
 	public final void addAddress(Address address) {
 		_addressList.add(address);
+		_addressAsStringList.add(Utility.getStringFromAddress(address, true));
 	}
 
 	public final void setDistanceInMeters(int distance) {
@@ -35,6 +37,10 @@ public class Place {
 
 	public final List<Address> getAddressList() {
 		return _addressList;
+	}
+	
+	public final List<String> getAddressAsStringList() {
+		return _addressAsStringList;
 	}
 
 	public final boolean isFavorite() {
