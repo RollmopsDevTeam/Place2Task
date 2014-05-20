@@ -9,7 +9,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.rollmopsdevteam.place2task.util.Place;
-import com.rollmopsdevteam.place2task.util.Utility;
 
 public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 		Filterable {
