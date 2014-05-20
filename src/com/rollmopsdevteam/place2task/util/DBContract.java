@@ -34,6 +34,7 @@ public final class DBContract {
 		public static final String COLUMN_NAME_ADDRESS_LAT = "Lat";
 		public static final String COLUMN_NAME_ADDRESS_LNG = "Lng";
 		public static final String COLUMN_NAME_DISTANCE = "Distance";
+		public static final String COLUMN_NAME_URL = "Url";
 		
 		public static final String[] PROJECTION = { _ID,
 				COLUMN_NAME_PLACE_NAME,
@@ -41,7 +42,8 @@ public final class DBContract {
 				COLUMN_NAME_COUNTRY,
 				COLUMN_NAME_ADDRESS_LAT,
 				COLUMN_NAME_ADDRESS_LNG,
-				COLUMN_NAME_DISTANCE
+				COLUMN_NAME_DISTANCE,
+				COLUMN_NAME_URL
 		};
 		
 

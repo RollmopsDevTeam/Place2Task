@@ -22,7 +22,9 @@ public class PlaceListDBHelper extends SQLiteOpenHelper {
 			+ DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG
 			+ DBContract.FLOAT_TYPE + " NOT NULL" + DBContract.COMMA_SEP
 			+ DBContract.PlaceEntryContract.COLUMN_NAME_DISTANCE
-			+ DBContract.INTEGER_TYPE + " NOT NULL)";
+			+ DBContract.TEXT_TYPE + " NOT_NULL" + DBContract.COMMA_SEP
+			+ DBContract.PlaceEntryContract.COLUMN_NAME_URL
+			+ DBContract.TEXT_TYPE + " NOT NULL)";
 
 	private static final String SQL_DELETE_PLACES = "DROP TABLE IF EXISTS "
 			+ DBContract.PlaceEntryContract.TABLE_NAME;

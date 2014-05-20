@@ -1,7 +1,9 @@
 package com.rollmopsdevteam.place2task.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,11 +35,30 @@ public class PlaceList extends ArrayList<Place> {
 		clear();
 		
 		SQLiteDatabase db = _placeListDBHelper.getReadableDatabase();
+		
 		Cursor c = db.query(DBContract.PlaceEntryContract.TABLE_NAME,
 				DBContract.PlaceEntryContract.PROJECTION, null, null, null, null, null, null);
 		
+		HashMap<String, Place> placesMap = new HashMap<>();
+		
 		if (c != null) {
 			while (c.moveToNext()) {
+				Place place;
+				String placeName = c.getString(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_PLACE_NAME));
+				if( placesMap.containsKey(placeName)) {
+					place = placesMap.get(placeName);
+				} else {
+					place = new Place();
+					placesMap.put(placeName, place);
+				}
+				place.setIsFavorite(true);
+				place.setName(placeName);
+				Address address = new Address(Locale.getDefault());
+				address.setLatitude(c.getDouble(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LAT)));
+				address.setLongitude(c.getDouble(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG)));
+				address.setCountryName(c.getString(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_COUNTRY)));
+				address.setUrl(c.getString(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_URL)));
+				place.addAddress(address);
 			}
 		}
 	}
@@ -58,6 +79,7 @@ public class PlaceList extends ArrayList<Place> {
 					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_COUNTRY, address.getCountryName());
 					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LAT, address.getLatitude());
 					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG, address.getLongitude());
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_URL, address.getUrl());
 					// TODO check to rather use UPDATE instead of INSERT here
 					// we use CONFLICT_IGNORE here since this is just meant to be an
 					// update
