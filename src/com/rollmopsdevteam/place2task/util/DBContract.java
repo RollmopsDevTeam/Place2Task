@@ -17,6 +17,11 @@ public final class DBContract {
 		public static final String COLUMN_NAME_TASK_ID = "TaskID";
 		public static final String COLUMN_NAME_TASK_NAME = "TaskName";
 		public static final String COLUMN_NAME_CREATION_DATE = "CreationDate";
-
+	}
+	
+	public static abstract class PlaceEntryContract implements BaseColumns {
+		public static final String TABLE_NAME = "Places";
+		public static final String COLUMN_NAME_PLACE_NAME = "Name";
+		public static final String COLUMN_NAME_ADDRESSES = "Addresses";
 	}
 }
