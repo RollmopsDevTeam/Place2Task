@@ -1,8 +1,13 @@
 package com.rollmopsdevteam.place2task.util;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle.Control;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.location.Address;
 import android.util.Log;
 
 public class PlaceList extends ArrayList<Place> {
@@ -22,6 +27,34 @@ public class PlaceList extends ArrayList<Place> {
 			_placeListDBHelper = new PlaceListDBHelper(_context);
 		}
 	}
+	
+	public void storeToDB() {
+		Log.v(Constants.LOG_TAG, "Storing PlaceList to DB.");
+		SQLiteDatabase db = _placeListDBHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+
+		for (Place place : this) {
+			List<Address> addresses = place.getAddressList();
+			if( addresses != null ) {
+				for( Address address : place.getAddressList() ) {
+					values.clear();
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_PLACE_NAME, place.getFavoriteName());
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_DISTANCE, place.getDistanceInMeters());
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_STRING, address.toString());
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_COUNTRY, address.getCountryName());
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LAT, address.getLatitude());
+					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG, address.getLongitude());
+					// TODO check to rather use UPDATE instead of INSERT here
+					// we use CONFLICT_IGNORE here since this is just meant to be an
+					// update
+					db.insertWithOnConflict(DBContract.PlaceEntryContract.TABLE_NAME,
+							null, values, SQLiteDatabase.CONFLICT_IGNORE);
+				}
+			}
+		}
+	}
+
+	
 	
 	public static void setContext(Context context) {
 		_context = context;

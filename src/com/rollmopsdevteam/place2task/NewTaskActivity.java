@@ -63,7 +63,7 @@ public class NewTaskActivity extends Activity {
 
 				} else {
 					_locationEditText.setText(_currentPlace
-							.getAddressStringList().get(0));
+							.getAddressList().get(0).toString());
 					_locationEditText.setTypeface(null, Typeface.NORMAL);
 					starButton.setImageResource(android.R.drawable.star_off);
 					starButton

@@ -10,6 +10,8 @@ public final class DBContract {
 	public static final String DATABASE_NAME = "TaskList.db";
 
 	public static final String TEXT_TYPE = " TEXT";
+	public static final String FLOAT_TYPE = " FLOAT";
+	public static final String INTEGER_TYPE = " INTEGER";
 	public static final String COMMA_SEP = ",";
 
 	public static abstract class TaskEntryContract implements BaseColumns {
@@ -22,6 +24,10 @@ public final class DBContract {
 	public static abstract class PlaceEntryContract implements BaseColumns {
 		public static final String TABLE_NAME = "Places";
 		public static final String COLUMN_NAME_PLACE_NAME = "Name";
-		public static final String COLUMN_NAME_ADDRESSES = "Addresses";
+		public static final String COLUMN_NAME_ADDRESS_STRING = "AddressAsString";
+		public static final String COLUMN_NAME_COUNTRY = "Country";
+		public static final String COLUMN_NAME_ADDRESS_LAT = "Lat";
+		public static final String COLUMN_NAME_ADDRESS_LNG = "Lng";
+		public static final String COLUMN_NAME_DISTANCE = "Distance";
 	}
 }

@@ -9,14 +9,12 @@ public class Place {
 
 	private String _favoriteName;
 	private List<Address> _addressList;
-	private List<String> _addressStringList;
-	private float _distanceInMeters;
+	private int _distanceInMeters;
 	private boolean _isFavorite;
 
 	public Place() {
 		_isFavorite = false;
 		_addressList = new ArrayList<Address>();
-		_addressStringList = new ArrayList<String>();
 	}
 
 	public final void setName(String name) {
@@ -25,16 +23,9 @@ public class Place {
 
 	public final void addAddress(Address address) {
 		_addressList.add(address);
-		String addressString = address.getAddressLine(0);
-		if (address.getMaxAddressLineIndex() > 1) {
-			for (int i = 1; i < address.getMaxAddressLineIndex(); i++) {
-				addressString += ", " + address.getAddressLine(i);
-			}
-		}
-		_addressStringList.add(addressString);
 	}
 
-	public final void setDistanceInMeters(float distance) {
+	public final void setDistanceInMeters(int distance) {
 		_distanceInMeters = distance;
 	}
 
@@ -53,8 +44,8 @@ public class Place {
 	public final String getFavoriteName() {
 		return _favoriteName;
 	}
-
-	public final List<String> getAddressStringList() {
-		return _addressStringList;
+	
+	public final int getDistanceInMeters() {
+		return _distanceInMeters;
 	}
 }

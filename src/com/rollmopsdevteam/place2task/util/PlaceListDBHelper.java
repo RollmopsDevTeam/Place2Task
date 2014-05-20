@@ -7,13 +7,22 @@ import android.util.Log;
 
 public class PlaceListDBHelper extends SQLiteOpenHelper {
 
+	// _ID, Name, AddressAsString, Country, Lat, Lng, Distance
 	private static final String SQL_CREATE_PLACES = "CREATE TABLE "
 			+ DBContract.PlaceEntryContract.TABLE_NAME + " ("
 			+ DBContract.PlaceEntryContract._ID + " INTEGER PRIMARY KEY,"
 			+ DBContract.PlaceEntryContract.COLUMN_NAME_PLACE_NAME
-			+ DBContract.TEXT_TYPE + " NOT NULL UNIQUE" + DBContract.COMMA_SEP
-			+ DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESSES
-			+ DBContract.TEXT_TYPE + " )";
+			+ DBContract.TEXT_TYPE + " NOT NULL" + DBContract.COMMA_SEP
+			+ DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_STRING
+			+ DBContract.TEXT_TYPE + " NOT NULL" + DBContract.COMMA_SEP
+			+ DBContract.PlaceEntryContract.COLUMN_NAME_COUNTRY
+			+ DBContract.TEXT_TYPE + " NOT_NULL" + DBContract.COMMA_SEP
+			+ DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LAT
+			+ DBContract.FLOAT_TYPE + " NOT NULL" + DBContract.COMMA_SEP
+			+ DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG
+			+ DBContract.FLOAT_TYPE + " NOT NULL" + DBContract.COMMA_SEP
+			+ DBContract.PlaceEntryContract.COLUMN_NAME_DISTANCE
+			+ DBContract.INTEGER_TYPE + " NOT NULL)";
 
 	private static final String SQL_DELETE_PLACES = "DROP TABLE IF EXISTS "
 			+ DBContract.PlaceEntryContract.TABLE_NAME;
