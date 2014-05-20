@@ -17,7 +17,7 @@ public class TaskList extends ArrayList<Task> {
 	private static final long serialVersionUID = 4105832240816454926L;
 	private static TaskList _instance = null;
 	private static Context _context = null;
-	private static TaskListDBHelper _taskListDBHelper;
+	private static DBHelper _taskListDBHelper;
 
 	// do not create TaskList by yourself. Instead use TaskList.getInstance()
 	private TaskList() {
@@ -26,7 +26,7 @@ public class TaskList extends ArrayList<Task> {
 					"Context is not set. Use TaskList.setContext() before calling TaskList.getInstance()!");
 		} else {
 			Log.v(Constants.LOG_TAG, "Creating " + TaskList.class.getName());
-			_taskListDBHelper = new TaskListDBHelper(_context);
+			_taskListDBHelper = new DBHelper(_context);
 		}
 	}
 
@@ -35,8 +35,8 @@ public class TaskList extends ArrayList<Task> {
 		clear();
 		SQLiteDatabase db = _taskListDBHelper.getReadableDatabase();
 
-		Cursor c = db.query(DBContract.TaskEntryContract.TABLE_NAME,
-				DBContract.TaskEntryContract.PROJECTION, null, null, null, null, null, null);
+		Cursor c = db.query(DBContract.TaskTableContract.TABLE_NAME,
+				DBContract.TaskTableContract.PROJECTION, null, null, null, null, null, null);
 
 		if (c != null) {
 			while (c.moveToNext()) {
@@ -45,15 +45,15 @@ public class TaskList extends ArrayList<Task> {
 					Date date = new SimpleDateFormat(
 							Constants.DATE_TIME_FORMAT, Locale.ENGLISH)
 							.parse(c.getString(c
-									.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE)));
+									.getColumnIndex(DBContract.TaskTableContract.COLUMN_NAME_CREATION_DATE)));
 
 					Task task = new Task();
 					// set taskID
 					task.setTaskID(UUID.fromString(c.getString(c
-							.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID))));
+							.getColumnIndex(DBContract.TaskTableContract.COLUMN_NAME_TASK_ID))));
 					// set task name
 					task.setTaskName(c.getString(c
-							.getColumnIndex(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME)));
+							.getColumnIndex(DBContract.TaskTableContract.COLUMN_NAME_TASK_NAME)));
 					// set creation date
 					task.setCreationDate(date);
 					add(task);
@@ -73,20 +73,20 @@ public class TaskList extends ArrayList<Task> {
 
 		for (Task task : this) {
 			values.clear();
-			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_ID, task
+			values.put(DBContract.TaskTableContract.COLUMN_NAME_TASK_ID, task
 					.getTaskID().toString());
-			values.put(DBContract.TaskEntryContract.COLUMN_NAME_TASK_NAME,
+			values.put(DBContract.TaskTableContract.COLUMN_NAME_TASK_NAME,
 					task.getTaskName());
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat(
 					Constants.DATE_TIME_FORMAT, Locale.ENGLISH);
-			values.put(DBContract.TaskEntryContract.COLUMN_NAME_CREATION_DATE,
+			values.put(DBContract.TaskTableContract.COLUMN_NAME_CREATION_DATE,
 					dateFormat.format(task.getCreationDate()));
 
 			// TODO check to rather use UPDATE instead of INSERT here
 			// we use CONFLICT_IGNORE here since this is just meant to be an
 			// update
-			db.insertWithOnConflict(DBContract.TaskEntryContract.TABLE_NAME,
+			db.insertWithOnConflict(DBContract.TaskTableContract.TABLE_NAME,
 					null, values, SQLiteDatabase.CONFLICT_IGNORE);
 		}
 	}

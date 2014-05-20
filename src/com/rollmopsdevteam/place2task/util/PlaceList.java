@@ -17,16 +17,16 @@ public class PlaceList extends ArrayList<Place> {
 	private static final long serialVersionUID = 6932570688740820271L;
 	private static PlaceList _instance = null;
 	private static Context _context;
-	private static PlaceListDBHelper _placeListDBHelper;
+	private static DBHelper _placeListDBHelper;
 	
-	// do not create TaskList by yourself. Instead use TaskList.getInstance()
+	// do not create PlaceList by yourself. Instead use PlaceList.getInstance()
 	private PlaceList() {
 		if (_context == null) {
 			Log.e(Constants.LOG_TAG,
 					"Context is not set. Use PlaceList.setContext() before calling PlaceList.getInstance()!");
 		} else {
 			Log.v(Constants.LOG_TAG, "Creating " + PlaceList.class.getName());
-			_placeListDBHelper = new PlaceListDBHelper(_context);
+			_placeListDBHelper = new DBHelper(_context);
 		}
 	}
 	
@@ -36,15 +36,15 @@ public class PlaceList extends ArrayList<Place> {
 		
 		SQLiteDatabase db = _placeListDBHelper.getReadableDatabase();
 		
-		Cursor c = db.query(DBContract.PlaceEntryContract.TABLE_NAME,
-				DBContract.PlaceEntryContract.PROJECTION, null, null, null, null, null, null);
+		Cursor c = db.query(DBContract.PlaceTableContract.TABLE_NAME,
+				DBContract.PlaceTableContract.PROJECTION, null, null, null, null, null, null);
 		
 		HashMap<String, Place> placesMap = new HashMap<>();
 		
 		if (c != null) {
 			while (c.moveToNext()) {
 				Place place;
-				String placeName = c.getString(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_PLACE_NAME));
+				String placeName = c.getString(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_PLACE_NAME));
 				if( placesMap.containsKey(placeName)) {
 					place = placesMap.get(placeName);
 				} else {
@@ -54,10 +54,10 @@ public class PlaceList extends ArrayList<Place> {
 				place.setIsFavorite(true);
 				place.setName(placeName);
 				Address address = new Address(Locale.getDefault());
-				address.setLatitude(c.getDouble(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LAT)));
-				address.setLongitude(c.getDouble(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG)));
-				address.setCountryName(c.getString(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_COUNTRY)));
-				address.setUrl(c.getString(c.getColumnIndex(DBContract.PlaceEntryContract.COLUMN_NAME_URL)));
+				address.setLatitude(c.getDouble(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LAT)));
+				address.setLongitude(c.getDouble(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LNG)));
+				address.setCountryName(c.getString(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY)));
+				address.setUrl(c.getString(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_URL)));
 				place.addAddress(address);
 			}
 		}
@@ -73,17 +73,17 @@ public class PlaceList extends ArrayList<Place> {
 			if( addresses != null ) {
 				for( Address address : place.getAddressList() ) {
 					values.clear();
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_PLACE_NAME, place.getFavoriteName());
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_DISTANCE, place.getDistanceInMeters());
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_STRING, address.toString());
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_COUNTRY, address.getCountryName());
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LAT, address.getLatitude());
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_ADDRESS_LNG, address.getLongitude());
-					values.put(DBContract.PlaceEntryContract.COLUMN_NAME_URL, address.getUrl());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_PLACE_NAME, place.getFavoriteName());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_DISTANCE, place.getDistanceInMeters());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_STRING, address.toString());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY, address.getCountryName());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LAT, address.getLatitude());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LNG, address.getLongitude());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_URL, address.getUrl());
 					// TODO check to rather use UPDATE instead of INSERT here
 					// we use CONFLICT_IGNORE here since this is just meant to be an
 					// update
-					db.insertWithOnConflict(DBContract.PlaceEntryContract.TABLE_NAME,
+					db.insertWithOnConflict(DBContract.PlaceTableContract.TABLE_NAME,
 							null, values, SQLiteDatabase.CONFLICT_IGNORE);
 				}
 			}

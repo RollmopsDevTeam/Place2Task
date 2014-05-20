@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
 import com.rollmopsdevteam.place2task.util.Place;
+import com.rollmopsdevteam.place2task.util.PlaceList;
 import com.rollmopsdevteam.place2task.util.Utility;
 
 public class NewTaskActivity extends Activity {
@@ -47,8 +48,8 @@ public class NewTaskActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_task);
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
-
-		// TODO add favorites to _locationEditText
+		
+		PlaceList.setContext(getApplicationContext());
 		
 		_locationEditText.setOnItemClickListener(new OnItemClickListener() {
 
@@ -105,9 +106,15 @@ public class NewTaskActivity extends Activity {
 				updateInterface();
 			}
 		});
-
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		PlaceList.getInstance().updateFromDB();
+		_locationEditText.setFavoritePlaces(PlaceList.getInstance());
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
