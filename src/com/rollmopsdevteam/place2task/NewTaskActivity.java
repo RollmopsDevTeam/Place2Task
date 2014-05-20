@@ -48,9 +48,9 @@ public class NewTaskActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_task);
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
-		
+
 		PlaceList.setContext(getApplicationContext());
-		
+
 		_locationEditText.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -63,8 +63,8 @@ public class NewTaskActivity extends Activity {
 					starButton.setImageResource(android.R.drawable.star_on);
 
 				} else {
-					_locationEditText.setText(_currentPlace
-							.getAddressList().get(0).toString());
+					_locationEditText.setText(_currentPlace.getAddressList()
+							.get(0).toString());
 					_locationEditText.setTypeface(null, Typeface.NORMAL);
 					starButton.setImageResource(android.R.drawable.star_off);
 					starButton
@@ -114,7 +114,7 @@ public class NewTaskActivity extends Activity {
 		PlaceList.getInstance().updateFromDB();
 		_locationEditText.setFavoritePlaces(PlaceList.getInstance());
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -208,7 +208,7 @@ public class NewTaskActivity extends Activity {
 	public void onCancelClicked(View v) {
 		finish();
 	}
-	
+
 	public void onSaveClicked(View v) {
 
 	}

@@ -19,13 +19,11 @@ public final class DBContract {
 		public static final String COLUMN_NAME_TASK_ID = "TaskID";
 		public static final String COLUMN_NAME_TASK_NAME = "TaskName";
 		public static final String COLUMN_NAME_CREATION_DATE = "CreationDate";
-		
-		public static final String[] PROJECTION = { _ID,
-				COLUMN_NAME_TASK_ID,
-				COLUMN_NAME_TASK_NAME,
-				COLUMN_NAME_CREATION_DATE };
+
+		public static final String[] PROJECTION = { _ID, COLUMN_NAME_TASK_ID,
+				COLUMN_NAME_TASK_NAME, COLUMN_NAME_CREATION_DATE };
 	}
-	
+
 	public static abstract class PlaceTableContract implements BaseColumns {
 		public static final String TABLE_NAME = "Places";
 		public static final String COLUMN_NAME_PLACE_NAME = "Name";
@@ -35,15 +33,10 @@ public final class DBContract {
 		public static final String COLUMN_NAME_ADDRESS_LNG = "Lng";
 		public static final String COLUMN_NAME_DISTANCE = "Distance";
 		public static final String COLUMN_NAME_URL = "Url";
-		
+
 		public static final String[] PROJECTION = { _ID,
-				COLUMN_NAME_PLACE_NAME,
-				COLUMN_NAME_ADDRESS_STRING,
-				COLUMN_NAME_COUNTRY,
-				COLUMN_NAME_ADDRESS_LAT,
-				COLUMN_NAME_ADDRESS_LNG,
-				COLUMN_NAME_DISTANCE,
-				COLUMN_NAME_URL
-		};
+				COLUMN_NAME_PLACE_NAME, COLUMN_NAME_ADDRESS_STRING,
+				COLUMN_NAME_COUNTRY, COLUMN_NAME_ADDRESS_LAT,
+				COLUMN_NAME_ADDRESS_LNG, COLUMN_NAME_DISTANCE, COLUMN_NAME_URL };
 	}
 }

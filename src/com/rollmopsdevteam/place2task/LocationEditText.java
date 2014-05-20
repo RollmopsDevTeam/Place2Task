@@ -48,9 +48,8 @@ public class LocationEditText extends AutoCompleteTextView {
 	public int getMaxNumberOfLines() {
 		return _maxNumberLines;
 	}
-	
 
-	private List<Address> getAddressesFromString( String location, int max ) {
+	private List<Address> getAddressesFromString(String location, int max) {
 		List<Address> addresses = null;
 		try {
 			// Getting a maximum of _maxNumberLines Address that matches the
@@ -62,7 +61,7 @@ public class LocationEditText extends AutoCompleteTextView {
 		}
 		return addresses;
 	}
-	
+
 	private void init(Context context) {
 
 		_locationAdapter = new LocationEditTextAdapter((Activity) context);
@@ -139,7 +138,7 @@ public class LocationEditText extends AutoCompleteTextView {
 			});
 
 			Log.v(Constants.LOG_TAG, "@doInBackground");
-			
+
 			// get addresses
 			return getAddressesFromString(locationName[0], _maxNumberLines);
 		}

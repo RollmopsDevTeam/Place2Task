@@ -44,7 +44,7 @@ public class Place {
 	public final String getFavoriteName() {
 		return _favoriteName;
 	}
-	
+
 	public final int getDistanceInMeters() {
 		return _distanceInMeters;
 	}

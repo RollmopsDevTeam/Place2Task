@@ -18,7 +18,7 @@ public class PlaceList extends ArrayList<Place> {
 	private static PlaceList _instance = null;
 	private static Context _context;
 	private static DBHelper _placeListDBHelper;
-	
+
 	// do not create PlaceList by yourself. Instead use PlaceList.getInstance()
 	private PlaceList() {
 		if (_context == null) {
@@ -29,23 +29,26 @@ public class PlaceList extends ArrayList<Place> {
 			_placeListDBHelper = new DBHelper(_context);
 		}
 	}
-	
+
 	public void updateFromDB() {
 		Log.v(Constants.LOG_TAG, "Updating PlaceList from DB.");
 		clear();
-		
+
 		SQLiteDatabase db = _placeListDBHelper.getReadableDatabase();
-		
+
 		Cursor c = db.query(DBContract.PlaceTableContract.TABLE_NAME,
-				DBContract.PlaceTableContract.PROJECTION, null, null, null, null, null, null);
-		
+				DBContract.PlaceTableContract.PROJECTION, null, null, null,
+				null, null, null);
+
 		HashMap<String, Place> placesMap = new HashMap<>();
-		
+
 		if (c != null) {
 			while (c.moveToNext()) {
 				Place place;
-				String placeName = c.getString(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_PLACE_NAME));
-				if( placesMap.containsKey(placeName)) {
+				String placeName = c
+						.getString(c
+								.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_PLACE_NAME));
+				if (placesMap.containsKey(placeName)) {
 					place = placesMap.get(placeName);
 				} else {
 					place = new Place();
@@ -54,15 +57,19 @@ public class PlaceList extends ArrayList<Place> {
 				place.setIsFavorite(true);
 				place.setName(placeName);
 				Address address = new Address(Locale.getDefault());
-				address.setLatitude(c.getDouble(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LAT)));
-				address.setLongitude(c.getDouble(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LNG)));
-				address.setCountryName(c.getString(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY)));
-				address.setUrl(c.getString(c.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_URL)));
+				address.setLatitude(c.getDouble(c
+						.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LAT)));
+				address.setLongitude(c.getDouble(c
+						.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LNG)));
+				address.setCountryName(c.getString(c
+						.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY)));
+				address.setUrl(c.getString(c
+						.getColumnIndex(DBContract.PlaceTableContract.COLUMN_NAME_URL)));
 				place.addAddress(address);
 			}
 		}
 	}
-	
+
 	public void storeToDB() {
 		Log.v(Constants.LOG_TAG, "Storing PlaceList to DB.");
 		SQLiteDatabase db = _placeListDBHelper.getWritableDatabase();
@@ -70,28 +77,41 @@ public class PlaceList extends ArrayList<Place> {
 
 		for (Place place : this) {
 			List<Address> addresses = place.getAddressList();
-			if( addresses != null ) {
-				for( Address address : place.getAddressList() ) {
+			if (addresses != null) {
+				for (Address address : place.getAddressList()) {
 					values.clear();
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_PLACE_NAME, place.getFavoriteName());
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_DISTANCE, place.getDistanceInMeters());
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_STRING, address.toString());
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY, address.getCountryName());
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LAT, address.getLatitude());
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LNG, address.getLongitude());
-					values.put(DBContract.PlaceTableContract.COLUMN_NAME_URL, address.getUrl());
+					values.put(
+							DBContract.PlaceTableContract.COLUMN_NAME_PLACE_NAME,
+							place.getFavoriteName());
+					values.put(
+							DBContract.PlaceTableContract.COLUMN_NAME_DISTANCE,
+							place.getDistanceInMeters());
+					values.put(
+							DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_STRING,
+							address.toString());
+					values.put(
+							DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY,
+							address.getCountryName());
+					values.put(
+							DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LAT,
+							address.getLatitude());
+					values.put(
+							DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_LNG,
+							address.getLongitude());
+					values.put(DBContract.PlaceTableContract.COLUMN_NAME_URL,
+							address.getUrl());
 					// TODO check to rather use UPDATE instead of INSERT here
-					// we use CONFLICT_IGNORE here since this is just meant to be an
+					// we use CONFLICT_IGNORE here since this is just meant to
+					// be an
 					// update
-					db.insertWithOnConflict(DBContract.PlaceTableContract.TABLE_NAME,
-							null, values, SQLiteDatabase.CONFLICT_IGNORE);
+					db.insertWithOnConflict(
+							DBContract.PlaceTableContract.TABLE_NAME, null,
+							values, SQLiteDatabase.CONFLICT_IGNORE);
 				}
 			}
 		}
 	}
 
-	
-	
 	public static void setContext(Context context) {
 		_context = context;
 	}
@@ -103,5 +123,4 @@ public class PlaceList extends ArrayList<Place> {
 		return _instance;
 	}
 
-	
 }
