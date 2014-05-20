@@ -63,8 +63,8 @@ public class NewTaskActivity extends Activity {
 					starButton.setImageResource(android.R.drawable.star_on);
 
 				} else {
-					_locationEditText.setText( Utility.getStringFromAddress(_currentPlace.getAddressList()
-							.get(0), true ) );
+					_locationEditText.setText(Utility.getStringFromAddress(
+							_currentPlace.getAddressList().get(0), true));
 					_locationEditText.setTypeface(null, Typeface.NORMAL);
 					starButton.setImageResource(android.R.drawable.star_off);
 					starButton

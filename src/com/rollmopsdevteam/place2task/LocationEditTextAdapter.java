@@ -52,7 +52,7 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 			descriptionView.setText("In "
 					+ place.getAddressList().get(0).getCountryName());
 		} else {
-			locationNameView.setText( Utility.getStringFromAddress( place.getAddressList().get(0), true ) );
+			locationNameView.setText(place.getAddressAsStringList().get(0));
 		}
 
 		return vi;

@@ -19,7 +19,6 @@ import android.widget.AutoCompleteTextView;
 
 import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.Place;
-import com.rollmopsdevteam.place2task.util.Utility;
 
 public class LocationEditText extends AutoCompleteTextView {
 

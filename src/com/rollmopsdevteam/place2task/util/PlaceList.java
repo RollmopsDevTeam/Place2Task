@@ -88,7 +88,7 @@ public class PlaceList extends ArrayList<Place> {
 							place.getDistanceInMeters());
 					values.put(
 							DBContract.PlaceTableContract.COLUMN_NAME_ADDRESS_STRING,
-							Utility.getStringFromAddress(address, true) );
+							Utility.getStringFromAddress(address, true));
 					values.put(
 							DBContract.PlaceTableContract.COLUMN_NAME_COUNTRY,
 							address.getCountryName());

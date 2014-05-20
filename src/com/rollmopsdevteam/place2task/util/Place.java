@@ -21,7 +21,7 @@ public class Place {
 	public final void setName(String name) {
 		_favoriteName = name;
 	}
-	
+
 	public final void addAddress(Address address) {
 		_addressList.add(address);
 		_addressAsStringList.add(Utility.getStringFromAddress(address, true));
@@ -38,7 +38,7 @@ public class Place {
 	public final List<Address> getAddressList() {
 		return _addressList;
 	}
-	
+
 	public final List<String> getAddressAsStringList() {
 		return _addressAsStringList;
 	}
