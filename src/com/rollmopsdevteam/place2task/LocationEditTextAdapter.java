@@ -9,6 +9,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.rollmopsdevteam.place2task.util.Place;
+import com.rollmopsdevteam.place2task.util.Utility;
 
 public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 		Filterable {
@@ -51,7 +52,7 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 			descriptionView.setText("In "
 					+ place.getAddressList().get(0).getCountryName());
 		} else {
-			locationNameView.setText(place.getAddressList().get(0).toString());
+			locationNameView.setText( Utility.getStringFromAddress( place.getAddressList().get(0), true ) );
 		}
 
 		return vi;

@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 
 import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.Place;
+import com.rollmopsdevteam.place2task.util.Utility;
 
 public class LocationEditText extends AutoCompleteTextView {
 
@@ -118,7 +119,7 @@ public class LocationEditText extends AutoCompleteTextView {
 			for (final Place favoritePlace : _favoritePlaces) {
 				if (favoritePlace.getFavoriteName().toLowerCase()
 						.contains(locationName[0].toLowerCase())
-						|| favoritePlace.getAddressList().get(0).toString()
+						|| Utility.getStringFromAddress( favoritePlace.getAddressList().get(0), true)
 								.toLowerCase()
 								.contains(locationName[0].toLowerCase())) {
 					((Activity) getContext()).runOnUiThread(new Runnable() {
