@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 			case 0:
 				return new TaskListFragment();
 			default:
-				return new MyPlacesFragment();
+				return new MapOverviewFragment();
 			}
 		}
 	}

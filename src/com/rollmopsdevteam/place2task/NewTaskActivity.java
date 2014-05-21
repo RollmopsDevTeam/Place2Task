@@ -137,7 +137,7 @@ public class NewTaskActivity extends Activity {
 
 	// click on calendar image
 	public void onCalendarClick(View v) {
-		final CalendarFragment calendarFragment = new CalendarFragment();
+		final CalendarDialog calendarFragment = new CalendarDialog();
 		calendarFragment.setDate(_dueDate);
 
 		calendarFragment.setOnOkListener(new OnClickListener() {

@@ -17,7 +17,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 
-public class MyPlacesFragment extends MapFragment {
+public class MapOverviewFragment extends MapFragment {
 
 	private MapView _mapView;
 	private GoogleMap _map;
@@ -27,7 +27,7 @@ public class MyPlacesFragment extends MapFragment {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		setHasOptionsMenu(true);
-		View fragment = inflater.inflate(R.layout.fragment_my_places,
+		View fragment = inflater.inflate(R.layout.fragment_map_overview,
 				container, false);
 
 		switch (GooglePlayServicesUtil

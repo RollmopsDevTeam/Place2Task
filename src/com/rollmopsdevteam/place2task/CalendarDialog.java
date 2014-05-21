@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 
-public class CalendarFragment extends DialogFragment {
+public class CalendarDialog extends DialogFragment {
 
 	private DialogInterface.OnClickListener _onCancelListener;
 	private DialogInterface.OnClickListener _onOkListener;
@@ -48,7 +48,7 @@ public class CalendarFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		View calendarDialog = inflater.inflate(R.layout.calendar_dialog, null);
+		View calendarDialog = inflater.inflate(R.layout.dialog_calendar, null);
 
 		builder.setPositiveButton(android.R.string.ok, _onOkListener)
 				.setNegativeButton(android.R.string.cancel, _onCancelListener);

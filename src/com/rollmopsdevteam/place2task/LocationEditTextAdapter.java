@@ -16,7 +16,7 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 	private Activity _activity;
 
 	public LocationEditTextAdapter(Activity activity) {
-		super(activity.getApplicationContext(), R.layout.location_dropdown_item);
+		super(activity.getApplicationContext(), R.layout.item_location_dropdown);
 		_activity = activity;
 	}
 
@@ -25,7 +25,7 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 		View vi = convertView;
 		if (vi == null) {
 			vi = _activity.getLayoutInflater().inflate(
-					R.layout.location_dropdown_item, null);
+					R.layout.item_location_dropdown, null);
 		}
 
 		TextView locationNameView = (TextView) vi

@@ -137,7 +137,6 @@ public class LocationEditText extends AutoCompleteTextView {
 				}
 			});
 
-			Log.v(Constants.LOG_TAG, "@doInBackground");
 
 			// get addresses
 			return getAddressesFromString(locationName[0], _maxNumberLines);
@@ -145,7 +144,6 @@ public class LocationEditText extends AutoCompleteTextView {
 
 		@Override
 		protected void onPostExecute(List<Address> addresses) {
-			Log.v(Constants.LOG_TAG, "@onPostExecute");
 			if (addresses != null && addresses.size() > 0) {
 				for (Address address : addresses) {
 					final Place place = new Place();
