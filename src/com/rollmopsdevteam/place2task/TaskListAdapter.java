@@ -23,9 +23,6 @@ public class TaskListAdapter extends BaseAdapter {
 		Log.v(Constants.LOG_TAG, "Constructing TaskListAdapter");
 		_activity = activity;
 
-		// our TaskList needs the context to create the DBHelper
-		TaskList.setContext(activity.getApplicationContext());
-
 		_inflater = _activity.getLayoutInflater();
 	}
 

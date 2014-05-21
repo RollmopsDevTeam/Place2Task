@@ -9,6 +9,7 @@ import android.app.FragmentManager;
 import android.util.Log;
 
 import com.rollmopsdevteam.place2task.util.Constants;
+import com.rollmopsdevteam.place2task.util.PlaceList;
 import com.rollmopsdevteam.place2task.util.TaskList;
 import com.rollmopsdevteam.place2task.util.Utility;
 
@@ -18,6 +19,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// load relevant data from DB
+		TaskList.setContext(getApplicationContext());
+		PlaceList.setContext(getApplicationContext());
+		TaskList.getInstance().updateFromDB();
+		PlaceList.getInstance().updateFromDB();
+		
 		Utility.setContext(getApplicationContext());
 
 		Log.v(Constants.LOG_TAG,
@@ -29,7 +36,6 @@ public class MainActivity extends Activity {
 				getFragmentManager());
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
-
 	}
 
 	@Override
@@ -39,6 +45,7 @@ public class MainActivity extends Activity {
 		// this would mean opening e.g. NewTaskActivity to store to DB...is that
 		// good?
 		TaskList.getInstance().storeToDB();
+		PlaceList.getInstance().storeToDB();
 	}
 
 	public static class MainFragmentPagerAdapter extends FragmentPagerAdapter {

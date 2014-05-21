@@ -49,8 +49,6 @@ public class NewTaskActivity extends Activity {
 		setContentView(R.layout.activity_new_task);
 		_locationEditText = (LocationEditText) findViewById(R.id.location);
 
-		PlaceList.setContext(getApplicationContext());
-
 		_locationEditText.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -111,7 +109,6 @@ public class NewTaskActivity extends Activity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		PlaceList.getInstance().updateFromDB();
 		_locationEditText.setFavoritePlaces(PlaceList.getInstance());
 	}
 
