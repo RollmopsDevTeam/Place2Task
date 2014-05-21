@@ -137,7 +137,6 @@ public class LocationEditText extends AutoCompleteTextView {
 				}
 			});
 
-
 			// get addresses
 			return getAddressesFromString(locationName[0], _maxNumberLines);
 		}

@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 		PlaceList.setContext(getApplicationContext());
 		TaskList.getInstance().updateFromDB();
 		PlaceList.getInstance().updateFromDB();
-		
+
 		Utility.setContext(getApplicationContext());
 
 		Log.v(Constants.LOG_TAG,
