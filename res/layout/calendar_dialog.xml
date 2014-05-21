@@ -7,7 +7,7 @@
     <CalendarView
         android:id="@+id/calendar"
         android:layout_width="match_parent"
-        android:layout_height="250dip"
+        android:layout_height="280dip"
         android:shownWeekCount="5" />
 
 </LinearLayout>
