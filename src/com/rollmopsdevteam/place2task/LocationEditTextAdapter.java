@@ -5,13 +5,11 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.rollmopsdevteam.place2task.util.Place;
 
-public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
-		Filterable {
+public class LocationEditTextAdapter extends ArrayAdapter<Place> {
 
 	private Activity _activity;
 
@@ -34,7 +32,7 @@ public class LocationEditTextAdapter extends ArrayAdapter<Place> implements
 				.findViewById(R.id.optional_location_description);
 
 		Place place = getItem(position);
-		vi.findViewById(R.id.favorite_star_image).setVisibility(
+		vi.findViewById(R.id.location_image).setVisibility(
 				place.isFavorite() ? View.VISIBLE : View.GONE);
 
 		descriptionView.setVisibility(place.isFavorite() ? View.VISIBLE
