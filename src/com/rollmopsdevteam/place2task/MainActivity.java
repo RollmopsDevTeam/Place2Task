@@ -5,8 +5,11 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.app.Activity;
 import android.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.app.FragmentManager;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.rollmopsdevteam.place2task.util.Constants;
 import com.rollmopsdevteam.place2task.util.PlaceList;
@@ -18,6 +21,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.v(Constants.LOG_TAG,
+				"@onCreate for " + MainActivity.class.getName());
 
 		// load relevant data from DB
 		TaskList.setContext(getApplicationContext());
@@ -25,11 +30,8 @@ public class MainActivity extends Activity {
 		TaskList.getInstance().updateFromDB();
 		PlaceList.getInstance().updateFromDB();
 
-		// initialize Utility 
+		// initialize Utility
 		Utility.setContext(getApplicationContext());
-
-		Log.v(Constants.LOG_TAG,
-				"@onCreate for " + MainActivity.class.getName());
 
 		setContentView(R.layout.activity_main);
 
@@ -37,6 +39,15 @@ public class MainActivity extends Activity {
 				getFragmentManager());
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
+		
+		
+		// setup navigation drawer
+		DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		ListView drawerList = (ListView) findViewById(R.id.left_drawer);
+
+		drawerList.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, getResources().getStringArray(
+						R.array.navigation_drawer_list)));
 	}
 
 	@Override

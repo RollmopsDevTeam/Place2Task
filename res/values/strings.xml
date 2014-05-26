@@ -24,5 +24,10 @@
     <string name="distance">Radius</string>
     <string name="title_activity_my_places">MyPlacesActivity</string>
     <string name="hello_world">Hello world!</string>
+    
+    <string-array name="navigation_drawer_list">
+        <item>Huhu</item>
+        <item>Blubb</item>
+    </string-array>
 
 </resources>

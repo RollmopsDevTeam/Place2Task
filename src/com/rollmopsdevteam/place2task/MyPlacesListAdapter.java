@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.rollmopsdevteam.place2task.util.Place;
 
@@ -23,6 +24,11 @@ public class MyPlacesListAdapter extends ArrayAdapter<Place> {
 			vi = _activity.getLayoutInflater().inflate(
 					R.layout.item_location_dropdown, null);
 		}
+		
+		TextView t = (TextView) vi.findViewById(R.id.location_name);
+		
+		t.setText("HUHU");
+		
 		return vi;
 	}
 
